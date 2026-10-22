@@ -16,105 +16,96 @@
     sirena: 'CECILIA TEDIN LIVE · Pedidos por WhatsApp_files/f4c0fe6a8f3e641aff2db9bd1064b3442eb94ddd417f36e74c9a98f65db6d969.jpg',
     blusa: 'CECILIA TEDIN LIVE · Pedidos por WhatsApp_files/c123aaf08708fcde4af84678ebd7915f05e5e96ee21de78330e85b6c45153a25.jpg',
     noir: 'CECILIA TEDIN LIVE · Pedidos por WhatsApp_files/ef42a0240a0854d562fb3b6ae86e91e14dc076273c2a5534e999609850b9209c.jpg',
-    tapado: 'CECILIA TEDIN LIVE · Pedidos por WhatsApp_files/48207bd6d008c3f2eb29a2d7cb158cd8a3143b07f69ee2133d9d5ab921d43c55.jpg'
+    tapado: 'CECILIA TEDIN LIVE · Pedidos por WhatsApp_files/48207bd6d008c3f2eb29a2d7cb158cd8a3143b07f69ee2133d9d5ab921d43c55.jpg',
+    // Prendas Reales del Catálogo Activo
+    maxiPalazzo: 'CECILIA TEDIN LIVE · Pedidos por WhatsApp_files/prod_maxi_palazzo.png',
+    figura10: 'CECILIA TEDIN LIVE · Pedidos por WhatsApp_files/prod_figura10.png',
+    efectoLipo: 'CECILIA TEDIN LIVE · Pedidos por WhatsApp_files/prod_efecto_lipo.png',
+    ultraPalazzo: 'CECILIA TEDIN LIVE · Pedidos por WhatsApp_files/prod_ultra_palazzo.png'
   };
 
-  // Base de Datos en Memoria (Mock Data)
+  // Base de Datos en Memoria con los 4 Productos Reales y Precios Oficiales
   const INITIAL_PRODUCTS = [
     {
       id: 1,
-      sku: 'VES-SIR-BUR',
-      name: 'Vestido Gala Sirena Burdeos',
-      category: 'vestidos',
-      categoryLabel: 'Vestidos de Gala',
-      price: 420,
-      image: ASSETS.sirena,
-      description: 'Silueta entallada con caída fluida en terciopelo italiano. Acabado artesanal con escote estructurado y detalle drapeado en cintura.',
-      sizes: ['XS', 'S', 'M', 'L'],
+      sku: 'PLZ-MAX-BOL',
+      name: 'Maxi Palazzo con Bolsillo',
+      category: 'maxi-palazzo',
+      categoryLabel: 'Maxi Palazzo Con Bolsillo',
+      price: 180,
+      image: ASSETS.maxiPalazzo,
+      description: 'Elegancia y comodidad con prácticos bolsillos laterales y corte holgado de tiro alto que estiliza tu figura con gran fluidez.',
+      sizes: ['P', 'M', 'G', 'GG'],
       colors: [
-        { name: 'Burdeos / Vino', hex: '#6a2939' },
-        { name: 'Negro Azabache', hex: '#1c1f18' }
+        { name: 'Verde Oliva', hex: '#5b6b4e' },
+        { name: 'Negro Clásico', hex: '#1c1f18' },
+        { name: 'Arena Natural', hex: '#ded8cb' }
       ],
-      stockFisico: 6,
-      reservas: 1, // 1 reservada en pedido pendiente
-      tag: 'Colección Gala',
-      isLive: false
+      stockFisico: 18,
+      reservas: 3,
+      tag: 'Best Seller LIVE',
+      isLive: true
     },
     {
       id: 2,
-      sku: 'CON-SAS-OLI',
-      name: 'Conjunto Sastrero Lino Oliva',
-      category: 'conjuntos',
-      categoryLabel: 'Conjuntos Sastreros',
-      price: 480,
-      image: ASSETS.hero,
-      description: 'Prenda insignia de la temporada. Blazer estructurado con hombreras suaves y pantalón palazzo de tiro alto confeccionado en puro lino.',
-      sizes: ['S', 'M', 'L'],
+      sku: 'PLZ-FIG-10',
+      name: 'Palazzo Figura 10',
+      category: 'figura-10',
+      categoryLabel: 'Palazzo Figura 10',
+      price: 170,
+      image: ASSETS.figura10,
+      description: 'Confort y estilo. Confeccionado con pretina de ajuste anatómico que acentúa la cintura y realza la silueta con caída estilizada.',
+      sizes: ['P', 'M', 'G', 'GG'],
       colors: [
-        { name: 'Oliva Silvestre', hex: '#464d35' },
-        { name: 'Arena Natural', hex: '#ded8cb' }
+        { name: 'Terracota Cálido', hex: '#7c432b' },
+        { name: 'Negro Azabache', hex: '#1c1c1a' },
+        { name: 'Almendra', hex: '#bfa386' }
       ],
-      stockFisico: 9,
-      reservas: 2,
-      tag: 'Prenda LIVE Estrella',
+      stockFisico: 24,
+      reservas: 4,
+      tag: 'Prenda Estrella',
       isLive: true
     },
     {
       id: 3,
-      sku: 'BLU-KIM-SAT',
-      name: 'Blusa Kimono Satén Champán',
-      category: 'blusas',
-      categoryLabel: 'Blusas & Tops',
-      price: 260,
-      image: ASSETS.blusa,
-      description: 'Caída ligera con tacto sedoso premium, mangas kimono acampanadas y lazo de ajuste que resalta la cintura con elegancia sutil.',
-      sizes: ['S', 'M', 'L'],
+      sku: 'PLZ-EFE-LIP',
+      name: 'Palazzo Efecto Lipo',
+      category: 'efecto-lipo',
+      categoryLabel: 'Efecto Lipo',
+      price: 160,
+      image: ASSETS.efectoLipo,
+      description: 'Moldea tu figura al instante con faja compresora integrada y tiro alto estructurado que brinda máxima sujeción y elegancia.',
+      sizes: ['P', 'M', 'G', 'GG'],
       colors: [
-        { name: 'Champán Dorado', hex: '#d9cbb2' },
-        { name: 'Blanco Nácar', hex: '#f7f6f2' }
+        { name: 'Verde Salvia', hex: '#627361' },
+        { name: 'Negro Noche', hex: '#191b17' },
+        { name: 'Terracota Suave', hex: '#8d4f3b' }
       ],
-      stockFisico: 12,
-      reservas: 3,
-      tag: 'Best Seller',
-      isLive: false
-    },
-    {
-      id: 4,
-      sku: 'VES-NOI-LIM',
-      name: 'Vestido Drapeado Noche Noir',
-      category: 'edicion-live',
-      categoryLabel: 'Edición Limitada LIVE',
-      price: 390,
-      image: ASSETS.noir,
-      description: 'Corte asimétrico con drapeado lateral. Diseñado exclusivamente para ventas relámpago durante las transmisiones en vivo.',
-      sizes: ['S', 'M', 'L', 'XL'],
-      colors: [
-        { name: 'Noir Profundo', hex: '#181b14' },
-        { name: 'Merlot Intenso', hex: '#521d28' }
-      ],
-      stockFisico: 4,
-      reservas: 2, // Stock vendible = 2 (Crítico!)
-      tag: 'Últimas 2 Unidades',
+      stockFisico: 15,
+      reservas: 2,
+      tag: 'Moldea tu Figura',
       isLive: true
     },
     {
-      id: 5,
-      sku: 'TAP-CAS-LAN',
-      name: 'Tapado Estructurado Cachemira',
-      category: 'abrigos',
-      categoryLabel: 'Abrigos & Capas',
-      price: 550,
-      image: ASSETS.tapado,
-      description: 'Confección en mezcla noble de cachemira y lana virgen. Solapas anchas y forrería interior en viscosa satinada con botonadura oculta.',
-      sizes: ['S', 'M'],
+      id: 4,
+      sku: 'PLZ-ULT-IMP',
+      name: 'Ultra Palazzo Impacto',
+      category: 'ultra-palazzo',
+      categoryLabel: 'Ultra Palazzo',
+      price: 190,
+      image: ASSETS.ultraPalazzo,
+      description: 'Amplitud y elegancia en cada paso. Pierna extra ancha con vuelo fluido de alta costura, textura premium y caída espectacular.',
+      sizes: ['P', 'M', 'G', 'GG'],
       colors: [
-        { name: 'Camel Clásico', hex: '#b39572' },
-        { name: 'Marfil Nórdico', hex: '#ece9e0' }
+        { name: 'Verde Esmeralda', hex: '#1b6838' },
+        { name: 'Negro Imperial', hex: '#181916' },
+        { name: 'Vino Borgoña', hex: '#5c1e28' },
+        { name: 'Beige Claro', hex: '#dfd7c6' }
       ],
-      stockFisico: 5,
-      reservas: 1,
-      tag: 'Alta Costura',
-      isLive: false
+      stockFisico: 20,
+      reservas: 5,
+      tag: 'Alta Gama',
+      isLive: true
     }
   ];
 
@@ -126,8 +117,8 @@
       channelKey: 'live',
       customer: 'Valeria Montero',
       phone: '+591 76543210',
-      items: 'Conjunto Sastrero Lino Oliva (Talla M, Oliva)',
-      total: 480,
+      items: 'Maxi Palazzo con Bolsillo (Talla M, Verde Oliva)',
+      total: 180,
       coupon: 'TIKTOK2X1 (-50% 2ª pza aplicada)',
       deliveryType: 'Delivery a Domicilio',
       deliveryAddress: 'Equipetrol Norte, Calle 7 #45 (Santa Cruz)',
@@ -144,8 +135,8 @@
       channelKey: 'web',
       customer: 'Camila Rojas Méndez',
       phone: '+591 71239874',
-      items: 'Vestido Gala Sirena Burdeos (Talla S)',
-      total: 445, // 420 + 25 delivery
+      items: 'Palazzo Figura 10 (Talla P, Terracota Cálido)',
+      total: 195, // 170 + 25 delivery
       coupon: 'Ninguno',
       deliveryType: 'Delivery a Domicilio (Cotizado Bs. 25)',
       deliveryAddress: 'Av. Las Américas, Condominio Sevilla Casa 12',
@@ -163,8 +154,8 @@
       channelKey: 'whatsapp',
       customer: 'Lucía Fernández S.',
       phone: '+591 70012456',
-      items: 'Blusa Kimono Satén Champán (Talla M)',
-      total: 260,
+      items: 'Palazzo Efecto Lipo (Talla G, Verde Salvia)',
+      total: 160,
       coupon: 'Ninguno',
       deliveryType: 'Retiro en Showroom Local',
       deliveryAddress: 'Showroom Central Cecilia Tedin',
@@ -182,8 +173,8 @@
       channelKey: 'live',
       customer: 'Mariana Paz Barba',
       phone: '+591 78945612',
-      items: 'Vestido Drapeado Noche Noir (Talla L)',
-      total: 390,
+      items: 'Ultra Palazzo Impacto (Talla GG, Verde Esmeralda)',
+      total: 190,
       coupon: 'TIKTOK2X1',
       deliveryType: 'Delivery a Domicilio',
       deliveryAddress: 'Barrio Sirari, C. Los Claveles 180',
@@ -201,8 +192,8 @@
       channelKey: 'web',
       customer: 'Sofía Justiniano',
       phone: '+591 72345678',
-      items: 'Tapado Cachemira & Lana (Talla S, Camel)',
-      total: 550,
+      items: 'Ultra Palazzo Impacto (Talla P, Negro Imperial)',
+      total: 190,
       coupon: 'Ninguno',
       deliveryType: 'Retiro en Showroom Local',
       deliveryAddress: 'Showroom Central',
@@ -219,8 +210,8 @@
       channelKey: 'whatsapp',
       customer: 'Andrea Hurtado V.',
       phone: '+591 76098712',
-      items: 'Conjunto Sastrero Lino Oliva (Talla S)',
-      total: 505, // 480 + 25 delivery
+      items: 'Maxi Palazzo con Bolsillo (Talla P, Arena Natural)',
+      total: 205, // 180 + 25 delivery
       coupon: 'Ninguno',
       deliveryType: 'Delivery a Domicilio',
       deliveryAddress: 'Av. Beni entre 4to y 5to anillo',
@@ -237,8 +228,8 @@
       channelKey: 'pos',
       customer: 'Venta Mostrador #109',
       phone: '+591 70000000',
-      items: 'Blusa Kimono Satén Champán (Talla S)',
-      total: 260,
+      items: 'Palazzo Figura 10 (Talla M, Terracota)',
+      total: 170,
       coupon: 'Descuento Mostrador (-0 Bs)',
       deliveryType: 'Entrega Inmediata Mostrador',
       deliveryAddress: 'Local Físico',
@@ -255,7 +246,7 @@
       timestamp: 'Hoy, 16:12',
       user: 'Carlos M. (Cajero)',
       action: 'Aprobación de Pago QR',
-      detail: 'Pedido #CT-8038 verificado contra extracto Bancario (Bs. 390). Se convirtió reserva en salida definitiva de inventario.',
+      detail: 'Pedido #CT-8038 verificado contra extracto Bancario (Bs. 190). Se convirtió reserva en salida definitiva de inventario.',
       module: 'Pedidos'
     },
     {
@@ -269,10 +260,25 @@
       timestamp: 'Ayer, 11:30',
       user: 'Andrea P. (Encargada)',
       action: 'Ajuste Manual de Inventario',
-      detail: 'SKU BLU-KIM-SAT: Aumento motivado (+5 uds). Motivo: Reposición de taller de confección.',
+      detail: 'SKU PLZ-MAX-BOL: Aumento motivado (+10 uds). Motivo: Ingreso nuevo lote confeccionado.',
       module: 'Inventario'
     }
   ];
+
+  // Control de Versión de Datos para actualización automática
+  const DATA_VERSION = 'v3_palazzos_reales';
+  try {
+    if (localStorage.getItem('ct_data_version') !== DATA_VERSION) {
+      localStorage.removeItem('ct_products');
+      localStorage.removeItem('ct_orders');
+      localStorage.removeItem('ct_audit_logs');
+      localStorage.removeItem('ct_cart');
+      localStorage.removeItem('ct_pos_cart');
+      localStorage.setItem('ct_data_version', DATA_VERSION);
+    }
+  } catch (e) {
+    console.warn('LocalStorage version check error:', e);
+  }
 
   // Persistencia en LocalStorage para sincronización multiventana
   function loadPersisted(key, fallback) {
@@ -308,13 +314,13 @@
       step: 1,
       selectedItems: [
         {
-          id: 2,
-          sku: 'CON-SAS-OLI',
-          name: 'Conjunto Sastrero Lino Oliva',
-          image: ASSETS.hero,
-          price: 480,
+          id: 1,
+          sku: 'PLZ-MAX-BOL',
+          name: 'Maxi Palazzo con Bolsillo',
+          image: ASSETS.maxiPalazzo,
+          price: 180,
           size: 'M',
-          color: 'Oliva Silvestre',
+          color: 'Verde Oliva',
           quantity: 1
         }
       ],
@@ -982,18 +988,20 @@
 
     // Si avanza del paso 1 al 2 y no tiene prendas, agregamos automáticamente la destacada
     if (stepNumber > 1 && state.quiz.selectedItems.length === 0) {
-      const featured = state.products[1];
-      state.quiz.selectedItems.push({
-        id: featured.id,
-        sku: featured.sku,
-        name: featured.name,
-        image: featured.image,
-        price: featured.price,
-        size: 'M',
-        color: 'Oliva Silvestre',
-        quantity: 1
-      });
-      showToast(`Se incluyó automáticamente la prenda estrella: ${featured.name}`);
+      const featured = state.products[0];
+      if (featured) {
+        state.quiz.selectedItems.push({
+          id: featured.id,
+          sku: featured.sku,
+          name: featured.name,
+          image: featured.image,
+          price: featured.price,
+          size: featured.sizes[1] || featured.sizes[0],
+          color: featured.colors[0].name,
+          quantity: 1
+        });
+        showToast(`Se incluyó automáticamente la prenda: ${featured.name}`);
+      }
     }
 
     state.quiz.step = stepNumber;
