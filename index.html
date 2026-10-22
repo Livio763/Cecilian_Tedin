@@ -70,7 +70,7 @@
         <button type="button" class="header-action-btn mobile-menu-toggle-btn" id="btn-mobile-menu" aria-label="Abrir Menú" onclick="window.CTApp.toggleStorefrontMobileMenu()">
           <span>&equiv; Menú</span>
         </button>
-        <button type="button" class="header-action-btn" onclick="alert('Seguimiento de pedido: Ingresa tu código de orden ej. CT-8040')">
+        <button type="button" class="header-action-btn header-track-btn" onclick="alert('Seguimiento de pedido: Ingresa tu código de orden ej. CT-8040')">
           <span>Rastrear Pedido</span>
         </button>
         <button type="button" class="header-action-btn header-cart-btn" onclick="window.CTApp.openCart()">
@@ -96,6 +96,7 @@
       <a href="#quienes-somos" class="storefront-mobile-nav-link" onclick="window.CTApp.closeStorefrontMobileMenu()">Quiénes Somos & Atelier</a>
       <a href="#ubicaciones" class="storefront-mobile-nav-link" onclick="window.CTApp.closeStorefrontMobileMenu()">Showroom Equipetrol</a>
       <a href="#pilares" class="storefront-mobile-nav-link" onclick="window.CTApp.closeStorefrontMobileMenu()">Propuesta de Valor</a>
+      <button type="button" class="storefront-mobile-nav-link" style="background:none;border:none;text-align:left;font-family:inherit;width:100%;cursor:pointer;" onclick="window.CTApp.closeStorefrontMobileMenu(); alert('Seguimiento de pedido: Ingresa tu código de orden ej. CT-8040')">Rastrear Pedido</button>
       <a href="live.html" class="storefront-mobile-nav-link" style="color:var(--ct-wine);font-weight:700;">Venta Rápida TikTok LIVE &rarr;</a>
       <a href="admin.html" class="storefront-mobile-nav-link" style="color:#d8b370;font-weight:700;">Panel Administrativo &rarr;</a>
     </nav>
