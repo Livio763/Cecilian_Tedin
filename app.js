@@ -9,6 +9,10 @@
 (function () {
   'use strict';
 
+  // Parametros Oficiales de la Tienda
+  const STORE_WHATSAPP = '59169273709';
+  const STORE_WHATSAPP_DISPLAY = '+591 69273709';
+
   // Rutas de fotos auténticas de la marca
   const ASSETS = {
     logo: 'CECILIA TEDIN LIVE · Pedidos por WhatsApp_files/57936c4e7aa42d4fdf61e33615a19e2525ccbde2e2fb24cf69b07554b99a0174.jpg',
@@ -1257,6 +1261,14 @@
       + `*Total estimado:* ${finalTotal} Bs.%0A%0A`
       + `Quedo a la espera de la cotizacion final y datos de QR para pagar por favor.`;
 
+    // Redirección inmediata a WhatsApp oficial
+    const officialWaUrl = `https://api.whatsapp.com/send?phone=${STORE_WHATSAPP}&text=${whatsappText}`;
+    try {
+      window.open(officialWaUrl, '_blank');
+    } catch (e) {
+      console.log('Popup blocked, use button below', e);
+    }
+
     // Renderizar pantalla de éxito dentro del teléfono
     const step4 = document.getElementById('mobile-step-4');
     if (step4) {
@@ -1277,8 +1289,8 @@
           </div>
 
           <div style="display:flex;flex-direction:column;gap:8px;">
-            <a href="https://api.whatsapp.com/send?phone=59170000000&text=${whatsappText}" target="_blank" class="btn-checkout-whatsapp" style="padding:10px;font-size:12px;width:100%;text-decoration:none;">
-              Continuar en WhatsApp
+            <a href="${officialWaUrl}" target="_blank" class="btn-checkout-whatsapp" style="padding:10px;font-size:12px;width:100%;text-decoration:none;">
+              Continuar en WhatsApp Oficial (${STORE_WHATSAPP_DISPLAY})
             </a>
             <a href="admin.html" class="btn-primary-ct" style="padding:10px;font-size:12px;justify-content:center;text-decoration:none;">
               Ver este pedido en Panel Admin
@@ -2194,8 +2206,8 @@
         </div>
 
         <div style="display:flex;flex-direction:column;gap:10px;">
-          <a href="https://api.whatsapp.com/send?phone=59170000000&text=${whatsappMsg}" target="_blank" class="btn-checkout-whatsapp" style="justify-content:center;text-decoration:none;">
-            Abrir WhatsApp para confirmar
+          <a href="https://api.whatsapp.com/send?phone=${STORE_WHATSAPP}&text=${whatsappMsg}" target="_blank" class="btn-checkout-whatsapp" style="justify-content:center;text-decoration:none;">
+            Abrir WhatsApp Oficial (${STORE_WHATSAPP_DISPLAY})
           </a>
           <a href="admin.html" class="btn-primary-ct" style="justify-content:center;text-decoration:none;">
             Ir a ver el pedido en el Panel Administrativo
