@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CECILIA TEDIN · Cuestionario Móvil TikTok LIVE</title>
+
+  <!-- Estilos base originales de la marca -->
+  <link rel="stylesheet" href="./CECILIA%20TEDIN%20LIVE%20%C2%B7%20Pedidos%20por%20WhatsApp_files/modern-elegance.css">
+
+  <!-- Estilos de la Propuesta Integral -->
+  <link rel="stylesheet" href="./proposal-styles.css">
+</head>
+<body style="background:var(--ct-bg);min-height:100vh;display:flex;flex-direction:column;">
+
+  <!-- Barra Superior de Navegación del Portal -->
+  <header class="top-portal-bar">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <img src="./CECILIA%20TEDIN%20LIVE%20%C2%B7%20Pedidos%20por%20WhatsApp_files/57936c4e7aa42d4fdf61e33615a19e2525ccbde2e2fb24cf69b07554b99a0174.jpg" alt="Logo" style="width:26px;height:26px;border-radius:50%;object-fit:cover;">
+      <span style="font-family:var(--font-serif);letter-spacing:0.08em;font-weight:700;color:#fff;">CECILIA TEDIN</span>
+      <span style="font-size:10px;background:var(--ct-wine);color:#fff;padding:2px 8px;border-radius:999px;font-weight:700;">LIVE SMARTPHONE</span>
+    </div>
+
+    <nav class="top-portal-links">
+      <a href="index.html" class="top-portal-link">
+        <span>&larr;</span> Volver a la Tienda Web
+      </a>
+      <span>&bull;</span>
+      <a href="admin.html" class="top-portal-link">
+        Panel Administrativo <span>&rarr;</span>
+      </a>
+    </nav>
+  </header>
+
+  <!-- Escenario de Presentación del Móvil -->
+  <main class="phone-presentation-stage" style="flex:1;align-items:center;padding:40px 24px 60px;">
+    <!-- Columna Lateral Izquierda: Contexto de la Experiencia Móvil -->
+    <aside class="stage-info-column">
+      <div class="stage-card">
+        <span class="hero-tag" style="margin-bottom:12px;">Formato Smartphone Nativo</span>
+        <h3>Venta Rápida TikTok LIVE</h3>
+        <p>
+          Diseñado exclusivamente para la pantalla de un celular. Los espectadores que siguen la transmisión en vivo exploran el catálogo simplificado, escogen variantes y completan su pedido en menos de 60 segundos.
+        </p>
+        <div class="stage-feature-list">
+          <div class="stage-feature-item">
+            <span class="stage-feature-num">01</span>
+            <div>
+              <strong>Catálogo Multiselección:</strong>
+              <p>Navega todas las prendas, elige tallas, colores y añade múltiples artículos a la orden con un toque.</p>
+            </div>
+          </div>
+          <div class="stage-feature-item">
+            <span class="stage-feature-num">02</span>
+            <div>
+              <strong>Cero Fricción:</strong>
+              <p>Sin contraseñas previas. Registro rápido con nombre, celular y notas especiales.</p>
+            </div>
+          </div>
+          <div class="stage-feature-item">
+            <span class="stage-feature-num">03</span>
+            <div>
+              <strong>3 Modalidades de Entrega:</strong>
+              <p>Retiro en Showroom (con mapa del local), Delivery local con GPS o Envíos a otros departamentos.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Dispositivo Móvil Físico (Mockup de Smartphone) -->
+    <div class="phone-device">
+      <!-- Isla Dinámica Superior -->
+      <div class="phone-dynamic-island">
+        <span class="island-camera-dot"></span>
+      </div>
+
+      <!-- Barra de Estado del Teléfono -->
+      <div class="phone-status-bar">
+        <span>19:42</span>
+        <div class="status-bar-icons">
+          <span>5G</span>
+          <span>100%</span>
+        </div>
+      </div>
+
+      <!-- Cabecera de la App Móvil -->
+      <header class="phone-app-header">
+        <div class="phone-app-brand">
+          <img src="./CECILIA%20TEDIN%20LIVE%20%C2%B7%20Pedidos%20por%20WhatsApp_files/57936c4e7aa42d4fdf61e33615a19e2525ccbde2e2fb24cf69b07554b99a0174.jpg" alt="Cecilia Tedin">
+          <span>CECILIA TEDIN</span>
+        </div>
+        <span class="phone-live-pill">TIKTOK LIVE</span>
+      </header>
+
+      <!-- Stepper Móvil de 4 Pasos -->
+      <nav class="phone-stepper">
+        <button type="button" class="phone-step-btn active" data-step="1" onclick="window.CTApp.setMobileStep(1)">
+          <span class="step-bullet">1</span>
+          <span>Prendas</span>
+        </button>
+        <button type="button" class="phone-step-btn" data-step="2" onclick="window.CTApp.setMobileStep(2)">
+          <span class="step-bullet">2</span>
+          <span>Datos</span>
+        </button>
+        <button type="button" class="phone-step-btn" data-step="3" onclick="window.CTApp.setMobileStep(3)">
+          <span class="step-bullet">3</span>
+          <span>Entrega</span>
+        </button>
+        <button type="button" class="phone-step-btn" data-step="4" onclick="window.CTApp.setMobileStep(4)">
+          <span class="step-bullet">4</span>
+          <span>Cierre</span>
+        </button>
+      </nav>
+
+      <!-- Pantalla Desplazable del Celular -->
+      <div class="phone-screen" id="phone-screen-container">
+        <!-- PASO 1 MÓVIL: CATÁLOGO ÁGIL SIMPLIFICADO -->
+        <div id="mobile-step-1" class="phone-step-view active">
+          <div class="mobile-catalog-header">
+            <h4>Catálogo Rápido LIVE</h4>
+            <p>Selecciona una o varias prendas anunciadas en la transmisión:</p>
+          </div>
+
+          <!-- Lista de Prendas Simplificadas -->
+          <div class="mobile-products-list" id="mobile-products-list">
+            <!-- Renderizado dinámico desde app.js -->
+          </div>
+        </div>
+
+        <!-- PASO 2 MÓVIL: DATOS PERSONALES Y MENSAJE -->
+        <div id="mobile-step-2" class="phone-step-view">
+          <div class="mobile-catalog-header">
+            <h4>Tus Datos de Contacto</h4>
+            <p>Sin contraseñas. Te contactaremos directo por WhatsApp con el presupuesto oficial:</p>
+          </div>
+
+          <!-- Resumen de prendas agregadas -->
+          <div class="mobile-selected-items-tray" id="mobile-selected-items-preview">
+            <!-- Renderizado dinámico -->
+          </div>
+
+          <div class="form-group-field" style="margin-bottom:12px;">
+            <label style="font-size:10px;">Nombre Completo *</label>
+            <input type="text" id="mobile-customer-name" value="Valeria Montero" placeholder="Tu nombre" style="padding:9px 12px;font-size:12px;">
+          </div>
+
+          <div class="form-group-field" style="margin-bottom:12px;">
+            <label style="font-size:10px;">Celular / WhatsApp *</label>
+            <input type="tel" id="mobile-customer-phone" value="+591 76543210" placeholder="+591 7XXXXXXX" style="padding:9px 12px;font-size:12px;">
+          </div>
+
+          <div class="form-group-field" style="margin-bottom:12px;">
+            <label style="font-size:10px;">Correo Electrónico (Opcional)</label>
+            <input type="email" id="mobile-customer-email" value="valeria.montero@gmail.com" placeholder="correo@ejemplo.com" style="padding:9px 12px;font-size:12px;">
+          </div>
+
+          <div class="form-group-field" style="margin-bottom:16px;">
+            <label style="font-size:10px;">Mensaje o Detalle que Dejar</label>
+            <textarea id="mobile-customer-notes" rows="2" placeholder="Ej: Por favor coordinar envío en horario de la tarde, o consultar disponibilidad de accesorios..." style="padding:9px 12px;font-size:11.5px;border-radius:12px;width:100%;border:1px solid var(--ct-line);background:#fff;"></textarea>
+          </div>
+
+          <div style="display:flex;justify-content:space-between;gap:8px;">
+            <button type="button" class="btn-card-detail" style="padding:8px 14px;" onclick="window.CTApp.setMobileStep(1)">&larr; Prendas</button>
+            <button type="button" class="btn-primary-ct" style="padding:8px 18px;font-size:11.5px;" onclick="window.CTApp.setMobileStep(3)">Entrega &rarr;</button>
+          </div>
+        </div>
+
+        <!-- PASO 3 MÓVIL: MODALIDAD DE ENTREGA (LOCAL, SANTA CRUZ, NACIONAL) -->
+        <div id="mobile-step-3" class="phone-step-view">
+          <div class="mobile-catalog-header">
+            <h4>Modalidad de Entrega</h4>
+            <p>Selecciona cómo deseas recibir tu pedido:</p>
+          </div>
+
+          <!-- Tabs de 3 Modalidades -->
+          <div class="delivery-mode-tabs">
+            <button type="button" class="btn-mode-tab active" data-mode="showroom" onclick="window.CTApp.setMobileDeliveryMode('showroom', this)">
+              Retiro Local
+            </button>
+            <button type="button" class="btn-mode-tab" data-mode="delivery_local" onclick="window.CTApp.setMobileDeliveryMode('delivery_local', this)">
+              Delivery SCZ
+            </button>
+            <button type="button" class="btn-mode-tab" data-mode="national" onclick="window.CTApp.setMobileDeliveryMode('national', this)">
+              Nacional
+            </button>
+          </div>
+
+          <!-- Subpanel 1: Recoger en Local (Showroom) -->
+          <div id="delivery-panel-showroom" class="delivery-subpanel active">
+            <div class="simulated-map-container" style="height:140px;">
+              <svg class="map-svg-canvas" viewBox="0 0 400 140">
+                <rect width="400" height="140" fill="#e4e8dc"/>
+                <path d="M0,40 L400,45" stroke="#cbd3c0" stroke-width="20" fill="none"/>
+                <path d="M120,0 L130,140" stroke="#cbd3c0" stroke-width="18" fill="none"/>
+                <path d="M260,0 L250,140" stroke="#cbd3c0" stroke-width="20" fill="none"/>
+                <rect x="145" y="55" width="90" height="45" rx="6" fill="#bcc7af"/>
+              </svg>
+              <div class="map-pin-indicator" style="top:55%;left:48%;">
+                <span class="map-pin-badge" style="background:var(--ct-olive);">Showroom Cecilia Tedin</span>
+                <span class="map-pin-icon" style="color:var(--ct-olive);">&bull;</span>
+              </div>
+            </div>
+            <div class="showroom-info-box">
+              <h5>Showroom Central Cecilia Tedin</h5>
+              <p>Av. San Martín #800, entre 3er y 4to anillo, Equipetrol (Santa Cruz).</p>
+              <p style="margin-top:4px;"><strong>Horario de Retiro:</strong> Lunes a Sábado de 10:00 a 20:00.</p>
+              <p style="color:var(--ct-olive);font-weight:700;margin-top:4px;">Sin costo adicional (0 Bs.)</p>
+            </div>
+          </div>
+
+          <!-- Subpanel 2: Delivery Santa Cruz con Mapa GPS -->
+          <div id="delivery-panel-delivery_local" class="delivery-subpanel">
+            <div class="simulated-map-container" style="height:150px;" onclick="window.CTApp.onMobileMapClick(event)">
+              <svg class="map-svg-canvas" viewBox="0 0 400 150">
+                <rect width="400" height="150" fill="#e8ede1"/>
+                <path d="M0,50 L400,40" stroke="#d5decb" stroke-width="20" fill="none"/>
+                <path d="M100,0 L110,150" stroke="#d5decb" stroke-width="16" fill="none"/>
+                <path d="M280,0 L270,150" stroke="#d5decb" stroke-width="20" fill="none"/>
+                <text x="10" y="20" fill="#727e69" font-size="9" font-weight="600">Toca el mapa para fijar tu pin GPS</text>
+              </svg>
+              <div id="mobile-map-pin" class="map-pin-indicator" style="top:50%;left:50%;">
+                <span class="map-pin-badge">Tu Ubicación</span>
+                <span class="map-pin-icon">&bull;</span>
+              </div>
+            </div>
+
+            <div class="map-coords-bar" style="font-size:9.5px;padding:5px 10px;">
+              <span>GPS: <strong id="mobile-coords-val">-17.7654, -63.1952</strong></span>
+              <span style="color:var(--ct-olive);">Cotizado: 25 Bs.</span>
+            </div>
+
+            <div class="form-group-field" style="margin-top:8px;margin-bottom:8px;">
+              <label style="font-size:10px;">Dirección Principal *</label>
+              <input type="text" id="mobile-address-street" value="Equipetrol Norte, Calle 7 #45" placeholder="Zona, calle, número" style="padding:8px 10px;font-size:11.5px;">
+            </div>
+
+            <div class="form-group-field" style="margin-bottom:12px;">
+              <label style="font-size:10px;">Detalle de la Dirección (Piso / Dpto / Ref.)</label>
+              <input type="text" id="mobile-address-detail" value="Edificio Los Laureles, Apto 402, frente a plaza" placeholder="Edificio, timbre, indicaciones" style="padding:8px 10px;font-size:11.5px;">
+            </div>
+          </div>
+
+          <!-- Subpanel 3: Envío a Otro Departamento (Nacional) -->
+          <div id="delivery-panel-national" class="delivery-subpanel">
+            <div class="form-group-field" style="margin-bottom:10px;">
+              <label style="font-size:10px;">Departamento de Destino *</label>
+              <select id="mobile-national-dept" style="width:100%;padding:9px;border-radius:12px;border:1px solid var(--ct-line);font-size:11.5px;">
+                <option value="La Paz">La Paz</option>
+                <option value="Cochabamba">Cochabamba</option>
+                <option value="Sucre">Sucre / Chuquisaca</option>
+                <option value="Tarija">Tarija</option>
+                <option value="Oruro">Oruro</option>
+                <option value="Potosí">Potosí</option>
+                <option value="Beni">Beni (Trinidad)</option>
+                <option value="Pando">Pando (Cobija)</option>
+              </select>
+            </div>
+
+            <div class="form-group-field" style="margin-bottom:10px;">
+              <label style="font-size:10px;">Ciudad o Municipio</label>
+              <input type="text" id="mobile-national-city" value="La Paz - Calacoto" placeholder="Ciudad o localidad" style="padding:8px 10px;font-size:11.5px;">
+            </div>
+
+            <div class="form-group-field" style="margin-bottom:10px;">
+              <label style="font-size:10px;">Agencia de Envío / Terminal o Domicilio</label>
+              <input type="text" id="mobile-national-agency" value="Terminal Central / Encomienda Aérea" placeholder="Ej: Flota Bolívar, Terminal Bimodal o Courier" style="padding:8px 10px;font-size:11.5px;">
+            </div>
+
+            <div style="background:#eaf0fc;border:1px solid #c9d8f5;border-radius:12px;padding:8px 10px;font-size:10.5px;color:#1e4387;margin-bottom:12px;">
+              Tarifa de encomienda nacional cotizada: <strong>40 Bs.</strong> (Despacho con código de guía).
+            </div>
+          </div>
+
+          <div style="display:flex;justify-content:space-between;gap:8px;margin-top:14px;">
+            <button type="button" class="btn-card-detail" style="padding:8px 14px;" onclick="window.CTApp.setMobileStep(2)">&larr; Datos</button>
+            <button type="button" class="btn-primary-ct" style="padding:8px 18px;font-size:11.5px;" onclick="window.CTApp.setMobileStep(4)">Revisar &rarr;</button>
+          </div>
+        </div>
+
+        <!-- PASO 4 MÓVIL: RESUMEN FINAL, CUPÓN Y CIERRE -->
+        <div id="mobile-step-4" class="phone-step-view">
+          <div class="mobile-catalog-header">
+            <h4>Confirmación de Orden</h4>
+            <p>Revisa el desglose antes de enviar tu mensaje a WhatsApp:</p>
+          </div>
+
+          <!-- Desglose de prendas -->
+          <div class="mobile-selected-items-tray" id="mobile-final-items-list">
+            <!-- Renderizado dinámico -->
+          </div>
+
+          <!-- Cupón LIVE -->
+          <div class="live-coupon-box" style="padding:10px;margin-bottom:12px;">
+            <div class="code" style="font-size:13px;">TIKTOK2X1</div>
+            <p style="font-size:10px;">Cupón validado: Descuento 2x1 o beneficio LIVE aplicado.</p>
+          </div>
+
+          <!-- Resumen de Costos -->
+          <div class="cart-totals" style="padding:10px;font-size:11.5px;margin-bottom:14px;">
+            <div class="total-row">
+              <span>Subtotal Prendas:</span>
+              <strong id="mobile-subtotal-val">0 Bs.</strong>
+            </div>
+            <div class="total-row">
+              <span>Descuento Promocional:</span>
+              <strong id="mobile-discount-val" style="color:var(--ct-wine)">0 Bs.</strong>
+            </div>
+            <div class="total-row">
+              <span>Costo de Envío:</span>
+              <strong id="mobile-delivery-cost-val">0 Bs.</strong>
+            </div>
+            <div class="total-row final" style="font-size:14px;padding-top:6px;margin-top:6px;">
+              <span>Total Estimado:</span>
+              <strong id="mobile-final-total-val" style="color:var(--ct-wine)">0 Bs.</strong>
+            </div>
+          </div>
+
+          <!-- Detalles de Destino y Mensaje -->
+          <div style="background:#fff;border:1px solid var(--ct-line);border-radius:12px;padding:10px;font-size:11px;margin-bottom:16px;">
+            <div><strong>Comprador:</strong> <span id="mobile-summary-customer">Valeria Montero</span></div>
+            <div style="margin-top:3px;"><strong>Modalidad:</strong> <span id="mobile-summary-delivery">Delivery</span></div>
+            <div style="margin-top:3px;"><strong>Ubicación/Destino:</strong> <span id="mobile-summary-address">Equipetrol</span></div>
+            <div style="margin-top:3px;color:var(--ct-muted);"><strong>Mensaje:</strong> <span id="mobile-summary-notes">Ninguno</span></div>
+          </div>
+
+          <button type="button" class="btn-checkout-whatsapp" style="padding:12px;font-size:12.5px;width:100%;margin-bottom:10px;" onclick="window.CTApp.finishMobileOrder()">
+            Solicitar Pedido por WhatsApp
+          </button>
+
+          <button type="button" class="btn-card-detail" style="width:100%;padding:8px;" onclick="window.CTApp.setMobileStep(3)">
+            &larr; Modificar Entrega
+          </button>
+        </div>
+      </div>
+
+      <!-- Barra Flotante Inferior de la Orden Móvil (Pasos 1, 2 y 3) -->
+      <div class="mobile-cart-tray" id="mobile-cart-tray">
+        <div>
+          <div class="tray-info-text" id="tray-count-text">1 prenda seleccionada</div>
+          <div class="tray-total-price" id="tray-total-text">480 Bs.</div>
+        </div>
+        <button type="button" class="btn-tray-next" onclick="window.CTApp.onMobileTrayNext()">
+          Continuar &rarr;
+        </button>
+      </div>
+
+      <!-- Barra Inferior de Inicio (Home Bar) -->
+      <div class="phone-home-indicator-wrap">
+        <div class="phone-home-indicator"></div>
+      </div>
+    </div>
+
+    <!-- Columna Lateral Derecha: Impacto en el Panel Administrativo -->
+    <aside class="stage-info-column">
+      <div class="stage-card">
+        <span class="hero-tag" style="margin-bottom:12px;">Sincronización Total</span>
+        <h3>Conexión con Panel Admin</h3>
+        <p>
+          Cada orden generada en este celular se sincroniza inmediatamente con el almacenamiento local y se refleja en el Panel Administrativo Central:
+        </p>
+        <div class="stage-feature-list">
+          <div class="stage-feature-item">
+            <span class="stage-feature-num">01</span>
+            <div>
+              <strong>Reserva Automática:</strong>
+              <p>Las prendas de la orden quedan reservadas protegiendo el stock real vendible.</p>
+            </div>
+          </div>
+          <div class="stage-feature-item">
+            <span class="stage-feature-num">02</span>
+            <div>
+              <strong>Trazabilidad Logística:</strong>
+              <p>El encargado visualiza si el pedido es para retiro en local, delivery local con GPS o encomienda nacional.</p>
+            </div>
+          </div>
+          <div class="stage-feature-item">
+            <span class="stage-feature-num">03</span>
+            <div>
+              <strong>Aprobación de Pago QR:</strong>
+              <p>Al confirmar el comprobante en el Backoffice, la reserva se convierte en salida definitiva y se registra en caja.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:24px;border-top:1px solid var(--ct-line);padding-top:16px;">
+          <a href="admin.html" class="btn-primary-ct" style="text-decoration:none;display:flex;justify-content:center;padding:12px;font-size:12.5px;">
+            Abrir Panel Administrativo &rarr;
+          </a>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Bandeja de Notificaciones Toast -->
+  <div id="toast-shelf" class="toast-shelf"></div>
+
+  <!-- Scripts -->
+  <script src="./CECILIA%20TEDIN%20LIVE%20%C2%B7%20Pedidos%20por%20WhatsApp_files/modern-elegance.js"></script>
+  <script src="./app.js"></script>
+
+</body>
+</html>

@@ -274,16 +274,35 @@
     }
   ];
 
-  // Estado reactivo de la aplicación
+  // Persistencia en LocalStorage para sincronización multiventana
+  function loadPersisted(key, fallback) {
+    try {
+      const val = localStorage.getItem(key);
+      if (val) return JSON.parse(val);
+    } catch (e) {
+      console.warn('LocalStorage read error:', e);
+    }
+    return JSON.parse(JSON.stringify(fallback));
+  }
+
+  function savePersisted(key, value) {
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+    } catch (e) {
+      console.warn('LocalStorage save error:', e);
+    }
+  }
+
+  // Estado reactivo y persistente de la aplicación
   let state = {
-    products: JSON.parse(JSON.stringify(INITIAL_PRODUCTS)),
-    orders: JSON.parse(JSON.stringify(INITIAL_ORDERS)),
-    auditLogs: JSON.parse(JSON.stringify(INITIAL_AUDIT_LOGS)),
-    cart: [],
+    products: loadPersisted('ct_products', INITIAL_PRODUCTS),
+    orders: loadPersisted('ct_orders', INITIAL_ORDERS),
+    auditLogs: loadPersisted('ct_audit_logs', INITIAL_AUDIT_LOGS),
+    cart: loadPersisted('ct_cart', []),
     appliedCoupon: null,
-    cartDeliveryType: 'pickup', // pickup | delivery
+    cartDeliveryType: 'pickup', // pickup | delivery | national
     currentCategory: 'all',
-    activeWindow: 1, // 1: Cliente, 2: Quiz LIVE, 3: Admin
+    posCategory: 'all',
     activeAdminTab: 'dashboard',
     quiz: {
       step: 1,
@@ -313,11 +332,20 @@
       couponApplied: true // TIKTOK2X1 por defecto
     },
     pos: {
-      cart: [],
+      cart: loadPersisted('ct_pos_cart', []),
       paymentMethod: 'qr',
-      cashAmount: 0
+      cashAmount: 0,
+      clientName: 'Cliente Mostrador (Venta Presencial)'
     }
   };
+
+  function persistData() {
+    savePersisted('ct_products', state.products);
+    savePersisted('ct_orders', state.orders);
+    savePersisted('ct_audit_logs', state.auditLogs);
+    savePersisted('ct_cart', state.cart);
+    savePersisted('ct_pos_cart', state.pos.cart);
+  }
 
   // Inicializar selecciones temporales por producto
   state.products.forEach(p => {
@@ -329,18 +357,27 @@
   });
 
   // ==========================================================================
-  // NAVEGACIÓN GLOBAL (MODO DIAPOSITIVA / 3 VENTANAS)
+  // ==========================================================================
+  // NAVEGACION GLOBAL MULTIPAGINA Y MODULAR
   // ==========================================================================
   function switchWindow(windowNumber) {
-    state.activeWindow = parseInt(windowNumber, 10);
+    const num = parseInt(windowNumber, 10);
+    const targetWindow = document.getElementById(`window-${num}`);
+
+    if (!targetWindow) {
+      if (num === 1) window.location.href = 'index.html';
+      else if (num === 2) window.location.href = 'live.html';
+      else if (num === 3) window.location.href = 'admin.html';
+      return;
+    }
+
+    state.activeWindow = num;
 
     document.querySelectorAll('.proposal-window').forEach(el => el.classList.remove('active'));
     document.querySelectorAll('.switch-btn').forEach(btn => btn.classList.remove('active'));
 
-    const targetWindow = document.getElementById(`window-${state.activeWindow}`);
+    targetWindow.classList.add('active');
     const targetBtn = document.querySelector(`.switch-btn[data-window="${state.activeWindow}"]`);
-
-    if (targetWindow) targetWindow.classList.add('active');
     if (targetBtn) targetBtn.classList.add('active');
 
     // Control de visibilidad del botón flotante de TikTok LIVE
@@ -705,6 +742,14 @@
   function checkoutCartWhatsApp() {
     if (state.cart.length === 0) return;
 
+    const nameInput = document.getElementById('cart-customer-name');
+    const phoneInput = document.getElementById('cart-customer-phone');
+    const addressInput = document.getElementById('cart-customer-address');
+
+    const customerName = nameInput && nameInput.value.trim() ? nameInput.value.trim() : 'Lucia Valverde';
+    const customerPhone = phoneInput && phoneInput.value.trim() ? phoneInput.value.trim() : '+591 78912345';
+    const customerAddress = addressInput && addressInput.value.trim() ? addressInput.value.trim() : (state.cartDeliveryType === 'delivery' ? 'Equipetrol Norte, Calle 7 Este' : 'Showroom Central Equipetrol');
+
     const subtotal = state.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     let discount = 0;
     if (state.appliedCoupon === 'TIKTOK2X1') {
@@ -719,20 +764,20 @@
 
     const newOrder = {
       id: orderId,
-      date: 'Recién creado',
+      date: 'Recien creado',
       channel: 'Tienda web',
       channelKey: 'web',
-      customer: 'Cliente Tienda Web',
-      phone: '+591 7XXXXXXX',
+      customer: customerName,
+      phone: customerPhone,
       items: itemsSummary,
       total: finalTotal,
       coupon: state.appliedCoupon || 'Ninguno',
       deliveryType: state.cartDeliveryType === 'delivery' ? 'Delivery a Domicilio' : 'Retiro en Showroom',
-      deliveryAddress: state.cartDeliveryType === 'delivery' ? 'Coordenadas GPS / Dirección a confirmar por WhatsApp' : 'Showroom Central',
+      deliveryAddress: customerAddress,
       coords: state.cartDeliveryType === 'delivery' ? '-17.7833, -63.1821' : 'N/A',
-      status: 'Registrado / Pendiente de cotización',
+      status: 'Registrado / Pendiente de cotizacion',
       statusKey: 'registrado',
-      qrVoucher: 'Pendiente de cotización y QR',
+      qrVoucher: 'Pendiente de cotizacion y QR',
       responsible: 'Sistema Web'
     };
 
@@ -750,19 +795,24 @@
     // Registrar en auditoría
     state.auditLogs.unshift({
       timestamp: 'Ahora mismo',
-      user: 'Cliente (Tienda Web)',
-      action: 'Creación de Pedido Web',
-      detail: `Pedido #${orderId} registrado. Subtotal: ${subtotal} Bs., Total: ${finalTotal} Bs. Reserva temporal activa.`,
+      user: `${customerName} (Tienda Web)`,
+      action: 'Creacion de Pedido Web',
+      detail: `Pedido #${orderId} registrado por ${customerName} (${customerPhone}). Subtotal: ${subtotal} Bs., Total: ${finalTotal} Bs. Reserva temporal activa.`,
       module: 'Pedidos Web'
     });
 
+    persistData();
+
     // Generar texto para WhatsApp
-    const whatsappMsg = `¡Hola Cecilia Tedin! Quiero confirmar mi pedido desde la tienda web:%0A%0A`
+    const whatsappMsg = `Hola Cecilia Tedin! Quiero confirmar mi pedido desde la tienda web:%0A%0A`
       + `*Pedido:* %23${orderId}%0A`
+      + `*Cliente:* ${encodeURIComponent(customerName)} (${customerPhone})%0A`
       + `*Prendas:* ${encodeURIComponent(itemsSummary)}%0A`
       + `*Modalidad:* ${state.cartDeliveryType === 'delivery' ? 'Delivery a Domicilio' : 'Retiro en Showroom'}%0A`
+      + `*Direccion:* ${encodeURIComponent(customerAddress)}%0A`
+      + (state.appliedCoupon ? `*Cupon:* ${state.appliedCoupon} (-${discount} Bs.)%0A` : '')
       + `*Total estimado:* ${finalTotal} Bs.%0A%0A`
-      + `Quedo a la espera de la cotización final y datos de QR para el pago.`;
+      + `Quedo a la espera de la cotizacion final y datos de QR para el pago.`;
 
     closeCartDrawer();
     state.cart = [];
@@ -1179,23 +1229,25 @@
     // Registrar en auditoría
     state.auditLogs.unshift({
       timestamp: 'Ahora mismo',
-      user: 'Espectador Móvil LIVE',
-      action: 'Orden Móvil LIVE',
-      detail: `Pedido #${orderId} registrado desde teléfono por ${custName} (${custPhone}). Modalidad: ${deliveryLabel}. Nota: "${custNotes || 'Sin nota'}". Reserva de inventario activada.`,
+      user: 'Espectador Movil LIVE',
+      action: 'Orden Movil LIVE',
+      detail: `Pedido #${orderId} registrado desde telefono por ${custName} (${custPhone}). Modalidad: ${deliveryLabel}. Nota: "${custNotes || 'Sin nota'}". Reserva de inventario activada.`,
       module: 'Venta LIVE'
     });
 
+    persistData();
+
     // Mensaje estructurado de WhatsApp
-    const whatsappText = `¡Hola Cecilia Tedin! Vi el live en TikTok y armé mi orden desde el celular:%0A%0A`
+    const whatsappText = `Hola Cecilia Tedin! Vi el live en TikTok y arme mi orden desde el celular:%0A%0A`
       + `*Pedido:* %23${orderId}%0A`
       + `*Prendas:* ${encodeURIComponent(itemsSummary)}%0A`
       + `*Comprador:* ${encodeURIComponent(custName)} (${custPhone})%0A`
       + `*Modalidad:* ${encodeURIComponent(deliveryLabel)}%0A`
       + `*Destino:* ${encodeURIComponent(addressLabel)}%0A`
       + (custNotes ? `*Mensaje:* ${encodeURIComponent(custNotes)}%0A` : '')
-      + `*Cupón:* TIKTOK2X1 (-${discount} Bs.)%0A`
+      + `*Cupon:* TIKTOK2X1 (-${discount} Bs.)%0A`
       + `*Total estimado:* ${finalTotal} Bs.%0A%0A`
-      + `Quedo a la espera de la cotización final y datos de QR para pagar por favor.`;
+      + `Quedo a la espera de la cotizacion final y datos de QR para pagar por favor.`;
 
     // Renderizar pantalla de éxito dentro del teléfono
     const step4 = document.getElementById('mobile-step-4');
@@ -1203,9 +1255,9 @@
       step4.innerHTML = `
         <div style="text-align:center;padding:24px 10px;">
           <div class="success-check-circle" style="width:58px;height:58px;font-size:28px;margin-bottom:12px;">&check;</div>
-          <h4 style="font-family:var(--font-serif);font-size:20px;color:var(--ct-ink);margin-bottom:6px;">¡Orden Móvil Generada!</h4>
+          <h4 style="font-family:var(--font-serif);font-size:20px;color:var(--ct-ink);margin-bottom:6px;">Orden Movil Generada!</h4>
           <p style="font-size:11.5px;color:var(--ct-muted);line-height:1.5;">
-            Tu reserva temporal está activa. Tu solicitud ya ingresó al panel central de Cecilia Tedin.
+            Tu reserva temporal esta activa. Tu solicitud ya ingreso al panel central de Cecilia Tedin.
           </p>
           <div class="order-code-pill" style="font-size:15px;padding:4px 14px;margin:10px 0 14px;">#${orderId}</div>
 
@@ -1217,14 +1269,14 @@
           </div>
 
           <div style="display:flex;flex-direction:column;gap:8px;">
-            <a href="https://api.whatsapp.com/send?phone=59170000000&text=${whatsappText}" target="_blank" class="btn-checkout-whatsapp" style="padding:10px;font-size:12px;width:100%;">
+            <a href="https://api.whatsapp.com/send?phone=59170000000&text=${whatsappText}" target="_blank" class="btn-checkout-whatsapp" style="padding:10px;font-size:12px;width:100%;text-decoration:none;">
               Continuar en WhatsApp
             </a>
-            <button type="button" class="btn-primary-ct" onclick="window.CTApp.switchWindow(3)" style="padding:10px;font-size:12px;justify-content:center;">
+            <a href="admin.html" class="btn-primary-ct" style="padding:10px;font-size:12px;justify-content:center;text-decoration:none;">
               Ver este pedido en Panel Admin
-            </button>
+            </a>
             <button type="button" class="btn-card-detail" onclick="window.CTApp.setMobileStep(1)" style="padding:8px;font-size:11px;">
-              Crear otra orden móvil
+              Crear otra orden movil
             </button>
           </div>
         </div>
@@ -1260,6 +1312,137 @@
     if (tabKey === 'customers') renderCustomersTable();
   }
 
+  // ==========================================================================
+  // GRAFICAS VISUALES EJECUTIVAS PARA DASHBOARD (FINANZAS, CANALES Y EMBUDO)
+  // ==========================================================================
+  function renderAdminCharts() {
+    const revenueContainer = document.getElementById('chart-revenue-trend');
+    const channelContainer = document.getElementById('chart-channel-distribution');
+    const funnelContainer = document.getElementById('chart-operational-funnel');
+
+    if (!revenueContainer && !channelContainer && !funnelContainer) return;
+
+    // Calcular datos reactivos
+    const confirmedOrders = state.orders.filter(o => ['pago-confirmado', 'preparando', 'enviado', 'finalizado'].includes(o.statusKey));
+    const totalCollected = confirmedOrders.reduce((sum, o) => sum + o.total, 0);
+
+    const pendingOrders = state.orders.filter(o => ['registrado', 'cotizado', 'pendiente-pago'].includes(o.statusKey));
+    const totalPending = pendingOrders.reduce((sum, o) => sum + o.total, 0);
+
+    const totalProjected = totalCollected + totalPending;
+
+    // 1. Grafica de Tendencia de Ingresos (SVG puro y estilizado)
+    if (revenueContainer) {
+      const maxVal = Math.max(totalProjected, 1);
+      const hCollected = Math.round((totalCollected / maxVal) * 130);
+      const hPending = Math.round((totalPending / maxVal) * 130);
+      const hProjected = 130;
+
+      revenueContainer.innerHTML = `
+        <svg viewBox="0 0 460 210" width="100%" height="200" style="overflow:visible;" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gradGreen" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1d7d54" stop-opacity="0.95"/>
+              <stop offset="100%" stop-color="#14573a" stop-opacity="0.8"/>
+            </linearGradient>
+            <linearGradient id="gradAmber" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#b48324" stop-opacity="0.95"/>
+              <stop offset="100%" stop-color="#8a6114" stop-opacity="0.8"/>
+            </linearGradient>
+            <linearGradient id="gradWine" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#831c38" stop-opacity="0.95"/>
+              <stop offset="100%" stop-color="#4a1525" stop-opacity="0.8"/>
+            </linearGradient>
+          </defs>
+          <line x1="40" y1="30" x2="430" y2="30" stroke="#e8ece0" stroke-dasharray="3,3"/>
+          <line x1="40" y1="90" x2="430" y2="90" stroke="#e8ece0" stroke-dasharray="3,3"/>
+          <line x1="40" y1="150" x2="430" y2="150" stroke="#cbd1bf" stroke-width="1.5"/>
+
+          <rect x="70" y="${150 - hCollected}" width="65" height="${hCollected}" rx="6" fill="url(#gradGreen)"/>
+          <text x="102" y="${142 - hCollected}" text-anchor="middle" font-size="12" font-weight="700" fill="#1d7d54">${totalCollected} Bs.</text>
+          <text x="102" y="172" text-anchor="middle" font-size="11" font-weight="600" fill="#2c3a26">Cobrado Real</text>
+          <text x="102" y="188" text-anchor="middle" font-size="10" fill="#697662">QR & POS</text>
+
+          <rect x="195" y="${150 - hPending}" width="65" height="${hPending}" rx="6" fill="url(#gradAmber)"/>
+          <text x="227" y="${142 - hPending}" text-anchor="middle" font-size="12" font-weight="700" fill="#b48324">${totalPending} Bs.</text>
+          <text x="227" y="172" text-anchor="middle" font-size="11" font-weight="600" fill="#2c3a26">En Proceso</text>
+          <text x="227" y="188" text-anchor="middle" font-size="10" fill="#697662">Pend. Validacion</text>
+
+          <rect x="320" y="${150 - hProjected}" width="65" height="${hProjected}" rx="6" fill="url(#gradWine)"/>
+          <text x="352" y="${142 - hProjected}" text-anchor="middle" font-size="12" font-weight="700" fill="#831c38">${totalProjected} Bs.</text>
+          <text x="352" y="172" text-anchor="middle" font-size="11" font-weight="600" fill="#2c3a26">Proyeccion Total</text>
+          <text x="352" y="188" text-anchor="middle" font-size="10" fill="#697662">100% Pedidos</text>
+        </svg>
+      `;
+    }
+
+    // 2. Grafica de Distribucion por Canales
+    if (channelContainer) {
+      const liveOrders = state.orders.filter(o => o.channelKey === 'live');
+      const webOrders = state.orders.filter(o => o.channelKey === 'web');
+      const waOrders = state.orders.filter(o => o.channelKey === 'whatsapp');
+      const posOrders = state.orders.filter(o => o.channelKey === 'pos');
+      const totalOrdersCount = state.orders.length || 1;
+
+      const channelsData = [
+        { name: 'TikTok LIVE (Venta Movil)', count: liveOrders.length, total: liveOrders.reduce((s, o) => s + o.total, 0), color: '#831c38' },
+        { name: 'Tienda Web Oficial', count: webOrders.length, total: webOrders.reduce((s, o) => s + o.total, 0), color: '#2c3a26' },
+        { name: 'WhatsApp Directo', count: waOrders.length, total: waOrders.reduce((s, o) => s + o.total, 0), color: '#1d7d54' },
+        { name: 'POS Showroom Local', count: posOrders.length, total: posOrders.reduce((s, o) => s + o.total, 0), color: '#b48324' }
+      ];
+
+      channelContainer.innerHTML = `
+        <div style="display:flex;flex-direction:column;gap:14px;padding:8px 4px;">
+          ${channelsData.map(ch => {
+            const pct = Math.round((ch.count / totalOrdersCount) * 100);
+            return `
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
+                  <span style="font-weight:600;color:var(--ct-ink);">${ch.name}</span>
+                  <span><strong>${ch.count} ped.</strong> &bull; ${ch.total.toLocaleString()} Bs. <span style="color:var(--ct-muted);">(${pct}%)</span></span>
+                </div>
+                <div style="background:#eaeee4;height:12px;border-radius:999px;overflow:hidden;border:1px solid #d4dbc9;">
+                  <div style="background:${ch.color};width:${pct}%;height:100%;border-radius:999px;transition:width 0.4s ease;"></div>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    // 3. Grafica de Embudo Operativo de 8 Estados
+    if (funnelContainer) {
+      const statesDef = [
+        { key: 'registrado', label: '1. Registrado', color: '#105273' },
+        { key: 'cotizado', label: '2. Cotizado', color: '#4d3775' },
+        { key: 'pendiente-pago', label: '3. Pend. Pago', color: '#b48324' },
+        { key: 'pago-confirmado', label: '4. Pago Conf.', color: '#1d7d54' },
+        { key: 'preparando', label: '5. Preparando', color: '#386348' },
+        { key: 'enviado', label: '6. Enviado / Listo', color: '#1f6e8c' },
+        { key: 'finalizado', label: '7. Finalizado', color: '#14573a' },
+        { key: 'cancelado', label: '8. Cancelado', color: '#831c38' }
+      ];
+
+      funnelContainer.innerHTML = `
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(110px, 1fr));gap:10px;padding:8px 0;">
+          ${statesDef.map(st => {
+            const count = state.orders.filter(o => o.statusKey === st.key).length;
+            const sum = state.orders.filter(o => o.statusKey === st.key).reduce((s, o) => s + o.total, 0);
+            return `
+              <div style="background:#fff;border:1px solid var(--ct-line);border-radius:12px;padding:12px 10px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.03);position:relative;overflow:hidden;">
+                <div style="height:3px;background:${st.color};position:absolute;top:0;left:0;right:0;"></div>
+                <div style="font-size:10.5px;color:var(--ct-muted);margin-bottom:6px;font-weight:600;">${st.label}</div>
+                <div style="font-size:22px;font-weight:800;color:${st.color};line-height:1;">${count}</div>
+                <div style="font-size:10px;color:var(--ct-muted);margin-top:4px;">${sum} Bs.</div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+  }
+
   function renderAdminDashboard() {
     // Regla del documento: No contabilizar pedidos pendientes como dinero recibido!
     // Solo sumar pedidos en 'Pago confirmado', 'Preparando', 'Enviado' o 'Finalizado'
@@ -1270,22 +1453,24 @@
     const totalPending = pendingOrders.reduce((sum, o) => sum + o.total, 0);
 
     const liveOrders = state.orders.filter(o => o.channelKey === 'live');
-    const webOrders = state.orders.filter(o => o.channelKey === 'web');
-    const waOrders = state.orders.filter(o => o.channelKey === 'whatsapp');
-    const posOrders = state.orders.filter(o => o.channelKey === 'pos');
 
     // Actualizar KPIs
     const kpiCobrado = document.getElementById('kpi-ingresos-cobrados');
     const kpiPendiente = document.getElementById('kpi-ingresos-pendientes');
     const kpiTotalPedidos = document.getElementById('kpi-total-pedidos');
     const kpiLive = document.getElementById('kpi-ventas-live');
+    const sidebarCount = document.getElementById('admin-sidebar-order-count');
 
     if (kpiCobrado) kpiCobrado.innerText = `${totalCollected.toLocaleString()} Bs.`;
     if (kpiPendiente) kpiPendiente.innerText = `${totalPending.toLocaleString()} Bs.`;
     if (kpiTotalPedidos) kpiTotalPedidos.innerText = state.orders.length;
     if (kpiLive) kpiLive.innerText = `${liveOrders.length} pedidos`;
+    if (sidebarCount) sidebarCount.innerText = state.orders.length;
 
-    // Renderizar últimos pedidos en dashboard
+    // Renderizar Graficas Visuales
+    renderAdminCharts();
+
+    // Renderizar ultimos pedidos en dashboard
     const dashTableBody = document.getElementById('dashboard-recent-orders-tbody');
     if (dashTableBody) {
       dashTableBody.innerHTML = state.orders.slice(0, 5).map(o => `
@@ -1459,6 +1644,7 @@
       });
     }
 
+    persistData();
     renderAdminOrders();
     renderAdminDashboard();
     closeOrderInspector();
@@ -1484,11 +1670,12 @@
     state.auditLogs.unshift({
       timestamp: 'Ahora mismo',
       user: 'Carlos M. (Cajero)',
-      action: 'Aprobación de Pago QR',
+      action: 'Aprobacion de Pago QR',
       detail: `Comprobante de #${orderId} verificado. Importe de ${order.total} Bs. contabilizado en caja. Salida definitiva de inventario efectuada.`,
       module: 'Cobranzas & Caja'
     });
 
+    persistData();
     renderAdminOrders();
     renderAdminDashboard();
     renderInventoryTable();
@@ -1497,7 +1684,7 @@
   }
 
   // ==========================================================================
-  // TABLA DE INVENTARIO MULTIVARIANTE (FÍSICO VS RESERVAS VS VENDIBLE)
+  // TABLA DE INVENTARIO MULTIVARIANTE (FISICO VS RESERVAS VS VENDIBLE)
   // ==========================================================================
   function renderInventoryTable() {
     const tbody = document.getElementById('inventory-table-tbody');
@@ -1540,16 +1727,16 @@
     const prod = state.products.find(p => p.sku === sku);
     if (!prod) return;
 
-    const input = prompt(`Ajuste de inventario para ${prod.name} (${sku}).\nStock físico actual: ${prod.stockFisico}.\n\nIngresa la cantidad a SUMAR o RESTAR (ej. +5 o -2):`, '+5');
+    const input = prompt(`Ajuste de inventario para ${prod.name} (${sku}).\nStock fisico actual: ${prod.stockFisico}.\n\nIngresa la cantidad a SUMAR o RESTAR (ej. +5 o -2):`, '+5');
     if (!input) return;
 
     const delta = parseInt(input, 10);
     if (isNaN(delta)) {
-      alert('Cantidad inválida.');
+      alert('Cantidad invalida.');
       return;
     }
 
-    const motivo = prompt('Ingresa el motivo del ajuste (exigido por la Bitácora de Auditoría):', 'Reposición de confección taller');
+    const motivo = prompt('Ingresa el motivo del ajuste (exigido por la Bitacora de Auditoria):', 'Reposicion de confeccion taller');
     if (!motivo) return;
 
     prod.stockFisico = Math.max(0, prod.stockFisico + delta);
@@ -1558,36 +1745,74 @@
       timestamp: 'Ahora mismo',
       user: 'Encargado de Inventario',
       action: 'Ajuste Manual de Inventario',
-      detail: `SKU ${sku}: Ajuste de ${delta > 0 ? '+' : ''}${delta} unidades (Nuevo total físico: ${prod.stockFisico}). Motivo: ${motivo}`,
+      detail: `SKU ${sku}: Ajuste de ${delta > 0 ? '+' : ''}${delta} unidades (Nuevo total fisico: ${prod.stockFisico}). Motivo: ${motivo}`,
       module: 'Inventario'
     });
 
+    persistData();
     renderInventoryTable();
     renderProductsGrid();
     showToast(`Inventario de ${prod.name} actualizado.`);
   }
 
   // ==========================================================================
-  // MÓDULO POS (TIENDA FÍSICA)
+  // MODULO POS (TIENDA FISICA CON FILTROS, CAMBIO Y COMPROBANTE TERMICO)
   // ==========================================================================
   function renderPOS() {
     const grid = document.getElementById('pos-grid-items');
     if (!grid) return;
 
-    grid.innerHTML = state.products.map(p => `
-      <div class="pos-item-card" onclick="window.CTApp.addToPOSCart(${p.id})">
-        <div class="pos-item-thumb">
-          <img src="${p.image}" alt="${p.name}">
+    let items = state.products;
+
+    if (state.pos.categoryFilter && state.pos.categoryFilter !== 'all') {
+      items = items.filter(p => p.category === state.pos.categoryFilter);
+    }
+
+    if (state.pos.searchQuery) {
+      const q = state.pos.searchQuery.toLowerCase();
+      items = items.filter(p => p.name.toLowerCase().includes(q) || p.sku.toLowerCase().includes(q));
+    }
+
+    if (items.length === 0) {
+      grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:36px;color:var(--ct-muted);font-size:13px;">No se encontraron prendas con los criterios actuales.</div>`;
+    } else {
+      grid.innerHTML = items.map(p => `
+        <div class="pos-item-card" onclick="window.CTApp.addToPOSCart(${p.id})">
+          <div class="pos-item-thumb">
+            <img src="${p.image}" alt="${p.name}">
+          </div>
+          <h5>${p.name}</h5>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto;">
+            <span class="price">${p.price} Bs.</span>
+            <span style="font-size:11px;color:var(--ct-muted)">Disp: ${p.stockFisico - p.reservas}</span>
+          </div>
         </div>
-        <h5>${p.name}</h5>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto;">
-          <span class="price">${p.price} Bs.</span>
-          <span style="font-size:11px;color:var(--ct-muted)">Stock: ${p.stockFisico - p.reservas}</span>
-        </div>
-      </div>
-    `).join('');
+      `).join('');
+    }
 
     renderPOSCart();
+  }
+
+  function onPOSSearch(query) {
+    state.pos.searchQuery = (query || '').trim();
+    renderPOS();
+  }
+
+  function filterPOSCategory(catKey, btn) {
+    state.pos.categoryFilter = catKey;
+    document.querySelectorAll('.pos-cat-pill').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    renderPOS();
+  }
+
+  function onPOSCashInput(val) {
+    const cash = parseFloat(val) || 0;
+    const total = state.pos.cart.reduce((s, i) => s + (i.price * i.quantity), 0);
+    const change = Math.max(0, cash - total);
+    const changeEl = document.getElementById('pos-change-val');
+    if (changeEl) {
+      changeEl.innerText = `${change.toFixed(2)} Bs.`;
+    }
   }
 
   function addToPOSCart(productId) {
@@ -1606,6 +1831,7 @@
         quantity: 1
       });
     }
+    persistData();
     renderPOSCart();
   }
 
@@ -1615,29 +1841,41 @@
 
     if (state.pos.cart.length === 0) {
       list.innerHTML = `<div style="text-align:center;padding:30px;color:var(--ct-muted);font-size:12px;">Caja lista. Selecciona prendas del mostrador.</div>`;
-      document.getElementById('pos-total-val').innerText = '0 Bs.';
+      const sub = document.getElementById('pos-subtotal-val');
+      const tot = document.getElementById('pos-total-val');
+      if (sub) sub.innerText = '0 Bs.';
+      if (tot) tot.innerText = '0 Bs.';
       return;
     }
 
     list.innerHTML = state.pos.cart.map((item, idx) => `
-      <div style="display:flex;justify-content:space-between;align-items:center;background:var(--ct-cream);padding:8px 12px;border-radius:10px;font-size:12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;background:var(--ct-cream);padding:8px 12px;border-radius:10px;font-size:12px;margin-bottom:6px;">
         <div>
           <strong>${item.name}</strong> (${item.size})<br>
           <span style="color:var(--ct-muted)">${item.price} Bs. &times; ${item.quantity}</span>
         </div>
         <div style="display:flex;align-items:center;gap:8px;">
           <strong>${item.price * item.quantity} Bs.</strong>
-          <button style="border:none;background:none;color:var(--ct-wine);cursor:pointer;" onclick="window.CTApp.removePOSCart(${idx})">&times;</button>
+          <button style="border:none;background:none;color:var(--ct-wine);cursor:pointer;font-weight:700;" onclick="window.CTApp.removePOSCart(${idx})">&times;</button>
         </div>
       </div>
     `).join('');
 
     const total = state.pos.cart.reduce((s, i) => s + (i.price * i.quantity), 0);
-    document.getElementById('pos-total-val').innerText = `${total} Bs.`;
+    const sub = document.getElementById('pos-subtotal-val');
+    const tot = document.getElementById('pos-total-val');
+    if (sub) sub.innerText = `${total} Bs.`;
+    if (tot) tot.innerText = `${total} Bs.`;
+
+    const cashInput = document.getElementById('pos-cash-input');
+    if (cashInput && cashInput.value) {
+      onPOSCashInput(cashInput.value);
+    }
   }
 
   function removePOSCart(idx) {
     state.pos.cart.splice(idx, 1);
+    persistData();
     renderPOSCart();
   }
 
@@ -1645,6 +1883,11 @@
     state.pos.paymentMethod = method;
     btn.parentElement.querySelectorAll('.pos-pay-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
+
+    const calc = document.getElementById('pos-change-calculator');
+    if (calc) {
+      calc.style.display = method === 'efectivo' ? 'block' : 'none';
+    }
   }
 
   function chargePOS() {
@@ -1657,6 +1900,10 @@
     const orderId = `POS-${Math.floor(100 + Math.random() * 900)}`;
     const itemsSummary = state.pos.cart.map(i => `${i.name} (${i.size}) x${i.quantity}`).join(' + ');
 
+    const cashInput = document.getElementById('pos-cash-input');
+    const cashGiven = (cashInput && parseFloat(cashInput.value)) ? parseFloat(cashInput.value) : total;
+    const change = Math.max(0, cashGiven - total);
+
     // Descontar inmediatamente del stock físico (venta presencial directa)
     state.pos.cart.forEach(item => {
       const prod = state.products.find(p => p.id === item.id);
@@ -1667,34 +1914,43 @@
 
     const newOrder = {
       id: orderId,
-      date: 'Recién cobrado',
-      channel: 'Local físico (POS)',
+      date: 'Recien cobrado',
+      channel: 'Local fisico (POS)',
       channelKey: 'pos',
       customer: 'Venta Presencial Mostrador',
-      phone: 'Presencial',
+      phone: 'Presencial Showroom',
       items: itemsSummary,
       total: total,
       coupon: 'Ninguno',
       deliveryType: 'Entrega Inmediata Mostrador',
-      deliveryAddress: 'Showroom Central',
+      deliveryAddress: 'Showroom Central Equipetrol',
       coords: 'N/A',
       status: 'Finalizado',
       statusKey: 'finalizado',
-      qrVoucher: `Cobrado vía ${state.pos.paymentMethod.toUpperCase()}`,
-      responsible: 'Cajero POS'
+      qrVoucher: `Cobrado via ${state.pos.paymentMethod.toUpperCase()}`,
+      responsible: 'Carlos M. (Cajero POS)'
     };
 
     state.orders.unshift(newOrder);
 
     state.auditLogs.unshift({
       timestamp: 'Ahora mismo',
-      user: 'Cajero Mostrador',
+      user: 'Carlos M. (Cajero Mostrador)',
       action: 'Venta Presencial POS',
-      detail: `Ticket #${orderId} cobrado por ${total} Bs. (${state.pos.paymentMethod.toUpperCase()}). Salida inmediata de inventario.`,
+      detail: `Ticket #${orderId} cobrado por ${total} Bs. (${state.pos.paymentMethod.toUpperCase()}). Salida inmediata de inventario efectuada.`,
       module: 'Punto de Venta POS'
     });
 
     state.pos.cart = [];
+    persistData();
+
+    // Mostrar comprobante térmico formal
+    showPOSReceipt(newOrder, cashGiven, change);
+
+    if (cashInput) cashInput.value = '';
+    const changeVal = document.getElementById('pos-change-val');
+    if (changeVal) changeVal.innerText = '0.00 Bs.';
+
     renderPOSCart();
     renderProductsGrid();
     renderInventoryTable();
@@ -1702,7 +1958,101 @@
     renderAdminOrders();
 
     showToast(`Venta POS #${orderId} por ${total} Bs. completada.`);
-    alert(`COMPROBANTE EMITIDO CON ÉXITO\n\nTicket #${orderId}\nTotal Cobrado: ${total} Bs.\nMedio de Pago: ${newOrder.qrVoucher}\nInventario descontado exitosamente.`);
+  }
+
+  function showPOSReceipt(order, cashGiven, change) {
+    const modal = document.getElementById('pos-receipt-modal');
+    if (!modal) return;
+
+    const now = new Date();
+    const dateFormatted = `${now.toLocaleDateString('es-BO')} ${now.toLocaleTimeString('es-BO', { hour: '2-digit', minute: '2-digit' })}`;
+
+    modal.innerHTML = `
+      <div class="modal-box" style="max-width:420px;padding:24px;background:#f5f6f2;">
+        <button class="btn-close-modal" onclick="window.CTApp.closePOSReceipt()">&times;</button>
+        <div class="receipt-paper">
+          <div class="receipt-header">
+            <h3>CECILIA TEDIN</h3>
+            <p>ALTA COSTURA &bull; SANTA CRUZ</p>
+            <p style="font-size:10px;">Showroom: Av. San Martin #800</p>
+            <p style="font-size:10px;">NIT: 1029384756 &bull; Santa Cruz - Bolivia</p>
+          </div>
+
+          <div class="receipt-divider"></div>
+
+          <div style="font-size:11px;display:flex;justify-content:space-between;margin-bottom:4px;">
+            <span>Ticket: <strong>#${order.id}</strong></span>
+            <span>${dateFormatted}</span>
+          </div>
+          <div style="font-size:11px;display:flex;justify-content:space-between;margin-bottom:10px;">
+            <span>Cajero: <strong>Carlos M.</strong></span>
+            <span>Caja: <strong>01 Mostrador</strong></span>
+          </div>
+
+          <div class="receipt-divider"></div>
+
+          <div class="receipt-items">
+            <div style="font-weight:700;margin-bottom:6px;">Detalle de Prendas:</div>
+            <div style="font-size:11.5px;line-height:1.6;margin-bottom:8px;">
+              ${order.items}
+            </div>
+          </div>
+
+          <div class="receipt-divider"></div>
+
+          <div class="receipt-totals">
+            <div class="receipt-row">
+              <span>Subtotal:</span>
+              <span>${order.total} Bs.</span>
+            </div>
+            <div class="receipt-row">
+              <span>Descuento:</span>
+              <span>0.00 Bs.</span>
+            </div>
+            <div class="receipt-row total">
+              <span>TOTAL BOB:</span>
+              <span>${order.total} Bs.</span>
+            </div>
+            <div class="receipt-divider"></div>
+            <div class="receipt-row">
+              <span>Forma de Pago:</span>
+              <span>${order.qrVoucher}</span>
+            </div>
+            ${order.qrVoucher.includes('EFECTIVO') ? `
+            <div class="receipt-row">
+              <span>Efectivo Recibido:</span>
+              <span>${cashGiven.toFixed(2)} Bs.</span>
+            </div>
+            <div class="receipt-row">
+              <span>Cambio Entregado:</span>
+              <span style="font-weight:700;">${change.toFixed(2)} Bs.</span>
+            </div>
+            ` : ''}
+          </div>
+
+          <div class="receipt-barcode">
+            ||| | ||||| || |||| || ||| |||| |
+            <div style="font-size:10px;letter-spacing:0.2em;margin-top:4px;">${order.id}-BO</div>
+          </div>
+
+          <div class="receipt-footer">
+            <p>Gracias por vestir distincion boliviana.</p>
+            <p>Conserva este comprobante para cambios dentro de los 15 dias.</p>
+          </div>
+        </div>
+
+        <div class="receipt-actions">
+          <button class="btn-receipt-print" onclick="window.print()">Imprimir Ticket</button>
+          <button class="btn-receipt-close" onclick="window.CTApp.closePOSReceipt()">Cerrar</button>
+        </div>
+      </div>
+    `;
+    modal.classList.add('active');
+  }
+
+  function closePOSReceipt() {
+    const modal = document.getElementById('pos-receipt-modal');
+    if (modal) modal.classList.remove('active');
   }
 
   // ==========================================================================
@@ -1797,11 +2147,12 @@
     state.auditLogs.unshift({
       timestamp: 'Ahora mismo',
       user: 'Andrea P. (Ventas)',
-      action: 'Creación Pedido Manual',
+      action: 'Creacion Pedido Manual',
       detail: `Pedido #${orderId} creado para venta WhatsApp directo (${customer}). Total: ${total} Bs. Reserva asignada.`,
       module: 'WhatsApp Directo'
     });
 
+    persistData();
     renderAdminOrders();
     renderAdminDashboard();
     renderInventoryTable();
@@ -1810,7 +2161,7 @@
   }
 
   // ==========================================================================
-  // MODAL DE ÉXITO DE PEDIDO WEB
+  // MODAL DE EXITO DE PEDIDO WEB
   // ==========================================================================
   function openOrderSuccessModal(orderId, whatsappMsg, order) {
     const modal = document.getElementById('order-success-modal');
@@ -1820,25 +2171,27 @@
       <div class="modal-box" style="max-width:540px;padding:36px;text-align:center;">
         <button class="btn-close-modal" onclick="window.CTApp.closeOrderSuccessModal()">&times;</button>
         <div class="success-check-circle">&check;</div>
-        <h3 style="font-family:var(--font-serif);font-size:26px;margin-bottom:8px;">¡Solicitud de Pedido Generada!</h3>
+        <h3 style="font-family:var(--font-serif);font-size:26px;margin-bottom:8px;">Solicitud de Pedido Generada!</h3>
         <p style="font-size:13px;color:var(--ct-muted);line-height:1.6;">
-          Tu pedido ha quedado registrado con estado <strong>Pendiente de Cotización</strong> y cuenta con reserva temporal activa.
+          Tu pedido ha quedado registrado con estado <strong>Pendiente de Cotizacion</strong> y cuenta con reserva temporal activa.
         </p>
         <div class="order-code-pill">#${orderId}</div>
 
         <div style="background:#eafaf1;border:1px solid #c2ebcf;padding:14px;border-radius:14px;text-align:left;font-size:12px;margin-bottom:20px;">
+          <strong>Cliente:</strong> ${order.customer} (${order.phone})<br>
+          <strong>Prendas:</strong> ${order.items}<br>
           <strong>Total cotizado:</strong> ${order.total} Bs.<br>
           <strong>Modalidad:</strong> ${order.deliveryType}<br>
-          <strong>Próximo paso:</strong> El encargado verifica la disponibilidad y te envía el QR oficial por WhatsApp para confirmar tu compra.
+          <strong>Proximo paso:</strong> El encargado verifica la disponibilidad y te envia el QR oficial por WhatsApp para confirmar tu compra.
         </div>
 
         <div style="display:flex;flex-direction:column;gap:10px;">
-          <a href="https://api.whatsapp.com/send?phone=59170000000&text=${whatsappMsg}" target="_blank" class="btn-checkout-whatsapp" style="justify-content:center;">
+          <a href="https://api.whatsapp.com/send?phone=59170000000&text=${whatsappMsg}" target="_blank" class="btn-checkout-whatsapp" style="justify-content:center;text-decoration:none;">
             Abrir WhatsApp para confirmar
           </a>
-          <button class="btn-primary-ct" onclick="window.CTApp.switchWindow(3); window.CTApp.closeOrderSuccessModal();" style="justify-content:center;">
+          <a href="admin.html" class="btn-primary-ct" style="justify-content:center;text-decoration:none;">
             Ir a ver el pedido en el Panel Administrativo
-          </button>
+          </a>
         </div>
       </div>
     `;
@@ -1850,20 +2203,30 @@
     if (modal) modal.classList.remove('active');
   }
 
-  // Reiniciar datos de demostración a su estado original
+  // Reiniciar datos de demostracion a su estado original
   function resetDemoData() {
-    if (!confirm('¿Deseas reiniciar todos los datos simulados a su estado inicial?')) return;
+    if (!confirm('Deseas reiniciar todos los datos simulados a su estado inicial?')) return;
+    localStorage.removeItem('ct_products');
+    localStorage.removeItem('ct_orders');
+    localStorage.removeItem('ct_audit_logs');
+    localStorage.removeItem('ct_cart');
+    localStorage.removeItem('ct_pos_cart');
+
     state.products = JSON.parse(JSON.stringify(INITIAL_PRODUCTS));
     state.orders = JSON.parse(JSON.stringify(INITIAL_ORDERS));
     state.auditLogs = JSON.parse(JSON.stringify(INITIAL_AUDIT_LOGS));
     state.cart = [];
+    state.pos.cart = [];
     state.appliedCoupon = null;
+    persistData();
+
     updateCartCount();
     renderProductsGrid();
     renderAdminDashboard();
     renderAdminOrders();
     renderInventoryTable();
-    showToast('Datos de demostración reiniciados exitosamente.');
+    renderPOS();
+    showToast('Datos de demostracion reiniciados exitosamente.');
   }
 
   // Sistema de Notificaciones Toast
@@ -1885,18 +2248,20 @@
     }, 3500);
   }
 
-  // Inicialización global
+  // Inicializacion global reactiva y segura por pagina
   window.addEventListener('DOMContentLoaded', () => {
-    renderProductsGrid();
-    renderMobileCatalog();
-    renderMobileStepPreview();
-    updateMobileCartTray();
-    renderAdminDashboard();
-    renderAdminOrders();
-    renderInventoryTable();
-    renderPOS();
-    renderAuditTable();
-    renderCustomersTable();
+    if (document.getElementById('products-grid')) renderProductsGrid();
+    if (document.getElementById('mobile-products-list')) {
+      renderMobileCatalog();
+      renderMobileStepPreview();
+      updateMobileCartTray();
+    }
+    if (document.getElementById('kpi-ingresos-cobrados')) renderAdminDashboard();
+    if (document.getElementById('admin-orders-tbody')) renderAdminOrders();
+    if (document.getElementById('inventory-table-tbody')) renderInventoryTable();
+    if (document.getElementById('pos-grid-items')) renderPOS();
+    if (document.getElementById('audit-table-tbody')) renderAuditTable();
+    if (document.getElementById('customers-table-tbody')) renderCustomersTable();
   });
 
   // Exponer API global
@@ -1917,7 +2282,7 @@
     applyCouponCart,
     setCartDelivery,
     checkoutCartWhatsApp,
-    // Funciones del Cuestionario Móvil (Smartphone)
+    // Funciones del Cuestionario Movil (Smartphone)
     renderMobileCatalog,
     setMobileStep,
     onMobileTrayNext,
@@ -1937,10 +2302,18 @@
     setOrderStatus,
     approveQRPayment,
     adjustStockPrompt,
+    renderAdminCharts,
+    // Funciones POS Tienda Fisica
     addToPOSCart,
     removePOSCart,
     setPOSPayment,
     chargePOS,
+    onPOSSearch,
+    filterPOSCategory,
+    onPOSCashInput,
+    showPOSReceipt,
+    closePOSReceipt,
+    // Otros
     createManualWhatsAppOrder,
     closeOrderSuccessModal,
     resetDemoData,
