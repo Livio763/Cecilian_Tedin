@@ -1312,17 +1312,74 @@
   }
 
   // ==========================================================================
+  // CONTROL DE MENUS Y CAJONES MOVILES (STOREFRONT & ADMIN)
+  // ==========================================================================
+  function toggleStorefrontMobileMenu() {
+    const drawer = document.getElementById('storefront-mobile-drawer');
+    const overlay = document.getElementById('storefront-mobile-overlay');
+    if (!drawer) return;
+    drawer.classList.toggle('open');
+    if (overlay) overlay.classList.toggle('open');
+  }
+
+  function closeStorefrontMobileMenu() {
+    const drawer = document.getElementById('storefront-mobile-drawer');
+    const overlay = document.getElementById('storefront-mobile-overlay');
+    if (drawer) drawer.classList.remove('open');
+    if (overlay) overlay.classList.remove('open');
+  }
+
+  function toggleAdminMobileMenu() {
+    const sidebar = document.querySelector('.admin-sidebar');
+    const overlay = document.getElementById('admin-sidebar-overlay');
+    if (!sidebar) return;
+    sidebar.classList.toggle('open');
+    if (overlay) overlay.classList.toggle('open');
+  }
+
+  function closeAdminMobileMenu() {
+    const sidebar = document.querySelector('.admin-sidebar');
+    const overlay = document.getElementById('admin-sidebar-overlay');
+    if (sidebar) sidebar.classList.remove('open');
+    if (overlay) overlay.classList.remove('open');
+  }
+
+  const adminTabLabels = {
+    'dashboard': 'Dashboard & Metricas',
+    'orders': 'Gestion de Pedidos',
+    'pos': 'POS Tienda Fisica',
+    'manual-order': 'Venta WhatsApp Directo',
+    'inventory': 'Inventario & Reservas',
+    'promos': 'Promociones & Cupones',
+    'customers': 'Clientes & Cuentas',
+    'audit': 'Bitacora de Auditoria',
+    'settings': 'Configuracion'
+  };
+
+  // ==========================================================================
   // VENTANA 3: PANEL ADMINISTRATIVO FORMAL (BACKOFFICE INTEGRAL)
   // ==========================================================================
   function switchAdminTab(tabKey, btn) {
     state.activeAdminTab = tabKey;
 
-    document.querySelectorAll('.admin-nav-item').forEach(b => b.classList.remove('active'));
-    if (btn) btn.classList.add('active');
+    document.querySelectorAll('.admin-nav-item').forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-tab') === tabKey);
+    });
+
+    document.querySelectorAll('.admin-quick-pill').forEach(p => {
+      p.classList.toggle('active', p.getAttribute('data-tab') === tabKey);
+    });
+
+    const activeLabel = document.getElementById('admin-mobile-active-label');
+    if (activeLabel && adminTabLabels[tabKey]) {
+      activeLabel.innerText = adminTabLabels[tabKey];
+    }
 
     document.querySelectorAll('.admin-view-tab').forEach(tab => tab.classList.remove('active'));
     const target = document.getElementById(`admin-tab-${tabKey}`);
     if (target) target.classList.add('active');
+
+    closeAdminMobileMenu();
 
     if (tabKey === 'dashboard') renderAdminDashboard();
     if (tabKey === 'orders') renderAdminOrders();
@@ -1486,6 +1543,8 @@
     if (kpiTotalPedidos) kpiTotalPedidos.innerText = state.orders.length;
     if (kpiLive) kpiLive.innerText = `${liveOrders.length} pedidos`;
     if (sidebarCount) sidebarCount.innerText = state.orders.length;
+    const quickOrderBadge = document.getElementById('quick-order-badge');
+    if (quickOrderBadge) quickOrderBadge.innerText = state.orders.length;
 
     // Renderizar Graficas Visuales
     renderAdminCharts();
@@ -2314,6 +2373,11 @@
     setMobileDeliveryMode,
     onMobileMapClick,
     finishMobileOrder,
+    // Funciones de Menu Movil (Navegacion Tactil)
+    toggleStorefrontMobileMenu,
+    closeStorefrontMobileMenu,
+    toggleAdminMobileMenu,
+    closeAdminMobileMenu,
     // Funciones del Panel Administrativo
     switchAdminTab,
     filterAdminOrders,

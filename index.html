@@ -67,6 +67,9 @@
 
       <!-- Acciones de Usuario y Bolsa -->
       <div class="header-actions-group">
+        <button type="button" class="header-action-btn mobile-menu-toggle-btn" id="btn-mobile-menu" aria-label="Abrir Menú" onclick="window.CTApp.toggleStorefrontMobileMenu()">
+          <span>&equiv; Menú</span>
+        </button>
         <button type="button" class="header-action-btn" onclick="alert('Seguimiento de pedido: Ingresa tu código de orden ej. CT-8040')">
           <span>Rastrear Pedido</span>
         </button>
@@ -77,6 +80,30 @@
       </div>
     </nav>
   </header>
+
+  <!-- Cajón de Menú Móvil Tienda -->
+  <div class="storefront-mobile-overlay" id="storefront-mobile-overlay" onclick="window.CTApp.closeStorefrontMobileMenu()"></div>
+  <aside class="storefront-mobile-drawer" id="storefront-mobile-drawer">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;border-bottom:1px solid var(--ct-line);padding-bottom:14px;">
+      <div style="font-family:var(--font-serif);font-weight:700;font-size:16px;">CECILIA TEDIN</div>
+      <button type="button" class="btn-close-modal" style="position:static;width:32px;height:32px;" onclick="window.CTApp.closeStorefrontMobileMenu()">&times;</button>
+    </div>
+    <div class="storefront-mobile-search" style="margin-bottom:18px;">
+      <input type="search" placeholder="Buscar palazzo..." class="header-search-input" style="width:100%;font-size:15px;padding:10px 14px;box-sizing:border-box;" oninput="window.CTApp.onHeaderSearch(this.value)">
+    </div>
+    <nav style="display:flex;flex-direction:column;gap:8px;">
+      <a href="#catalogo" class="storefront-mobile-nav-link" onclick="window.CTApp.closeStorefrontMobileMenu()">Colección Palazzos</a>
+      <a href="#quienes-somos" class="storefront-mobile-nav-link" onclick="window.CTApp.closeStorefrontMobileMenu()">Quiénes Somos & Atelier</a>
+      <a href="#ubicaciones" class="storefront-mobile-nav-link" onclick="window.CTApp.closeStorefrontMobileMenu()">Showroom Equipetrol</a>
+      <a href="#pilares" class="storefront-mobile-nav-link" onclick="window.CTApp.closeStorefrontMobileMenu()">Propuesta de Valor</a>
+      <a href="live.html" class="storefront-mobile-nav-link" style="color:var(--ct-wine);font-weight:700;">Venta Rápida TikTok LIVE &rarr;</a>
+      <a href="admin.html" class="storefront-mobile-nav-link" style="color:#d8b370;font-weight:700;">Panel Administrativo &rarr;</a>
+    </nav>
+    <div style="margin-top:auto;padding-top:20px;border-top:1px solid var(--ct-line);font-size:12px;color:var(--ct-muted);">
+      <div>WhatsApp Oficial:</div>
+      <a href="https://api.whatsapp.com/send?phone=59169273709" target="_blank" style="color:var(--ct-olive);font-weight:700;text-decoration:none;font-size:13px;">+591 69273709</a>
+    </div>
+  </aside>
 
   <!-- ========================================================================
        VENTANA 1: EXPERIENCIA DEL CLIENTE (LANDING & CATÁLOGO CURADO)

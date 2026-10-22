@@ -45,16 +45,44 @@
   <!-- ========================================================================
        PANEL ADMINISTRATIVO FORMAL (BACKOFFICE INTEGRAL)
        ======================================================================== -->
+  <!-- Overlay Movil para Sidebar -->
+  <div class="admin-sidebar-overlay" id="admin-sidebar-overlay" onclick="window.CTApp.closeAdminMobileMenu()"></div>
+
+  <!-- Barra Movil Superior del Administrador -->
+  <header class="admin-mobile-topbar">
+    <button type="button" class="btn-admin-mobile-menu" onclick="window.CTApp.toggleAdminMobileMenu()" aria-label="Abrir Menu">
+      <span class="admin-menu-icon">&equiv;</span>
+      <span>Menu</span>
+    </button>
+    <div class="admin-mobile-title">
+      <span id="admin-mobile-active-label">Dashboard &amp; Metricas</span>
+    </div>
+    <a href="index.html" class="btn-admin-mobile-back" title="Ir a la Tienda">
+      <span>Tienda &rarr;</span>
+    </a>
+  </header>
+
+  <!-- Pildoras de Navegacion Rapida Movil -->
+  <nav class="admin-quick-pills-bar" aria-label="Navegacion Rapida">
+    <button type="button" class="admin-quick-pill active" data-tab="dashboard" onclick="window.CTApp.switchAdminTab('dashboard', this)">Dashboard</button>
+    <button type="button" class="admin-quick-pill" data-tab="orders" onclick="window.CTApp.switchAdminTab('orders', this)">Pedidos <span class="quick-pill-badge" id="quick-order-badge">7</span></button>
+    <button type="button" class="admin-quick-pill" data-tab="pos" onclick="window.CTApp.switchAdminTab('pos', this)">POS Tienda</button>
+    <button type="button" class="admin-quick-pill" data-tab="manual-order" onclick="window.CTApp.switchAdminTab('manual-order', this)">WhatsApp</button>
+    <button type="button" class="admin-quick-pill" data-tab="inventory" onclick="window.CTApp.switchAdminTab('inventory', this)">Inventario</button>
+    <button type="button" class="admin-quick-pill" data-tab="audit" onclick="window.CTApp.switchAdminTab('audit', this)">Auditoria</button>
+  </nav>
+
   <div class="admin-wrapper" style="flex:1;">
     <!-- Sidebar Corporativo Formal -->
     <aside class="admin-sidebar">
-      <div class="sidebar-header">
+      <div class="sidebar-header" style="display:flex;justify-content:space-between;align-items:center;">
         <div class="admin-corp-logo">
           <div class="corp-titles">
             <h2>CECILIA TEDIN</h2>
             <span>Panel Operativo Central</span>
           </div>
         </div>
+        <button type="button" class="admin-sidebar-close-btn" onclick="window.CTApp.closeAdminMobileMenu()" aria-label="Cerrar Menu">&times;</button>
       </div>
 
       <nav class="admin-nav-menu">

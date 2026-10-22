@@ -32,63 +32,18 @@
     </nav>
   </header>
 
-  <!-- Escenario de Presentación del Móvil -->
-  <main class="phone-presentation-stage" style="flex:1;align-items:center;padding:40px 24px 60px;">
-    <!-- Columna Lateral Izquierda: Contexto de la Experiencia Móvil -->
-    <aside class="stage-info-column">
-      <div class="stage-card">
-        <span class="hero-tag" style="margin-bottom:12px;">Formato Smartphone Nativo</span>
-        <h3>Venta Rápida TikTok LIVE</h3>
-        <p>
-          Diseñado exclusivamente para la pantalla de un celular. Los espectadores que siguen la transmisión en vivo exploran el catálogo simplificado, escogen variantes y completan su pedido en menos de 60 segundos.
-        </p>
-        <div class="stage-feature-list">
-          <div class="stage-feature-item">
-            <span class="stage-feature-num">01</span>
-            <div>
-              <strong>Catálogo Multiselección:</strong>
-              <p>Navega todas las prendas, elige tallas, colores y añade múltiples artículos a la orden con un toque.</p>
-            </div>
-          </div>
-          <div class="stage-feature-item">
-            <span class="stage-feature-num">02</span>
-            <div>
-              <strong>Cero Fricción:</strong>
-              <p>Sin contraseñas previas. Registro rápido con nombre, celular y notas especiales.</p>
-            </div>
-          </div>
-          <div class="stage-feature-item">
-            <span class="stage-feature-num">03</span>
-            <div>
-              <strong>3 Modalidades de Entrega:</strong>
-              <p>Retiro en Showroom (con mapa del local), Delivery local con GPS o Envíos a otros departamentos.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </aside>
-
-    <!-- Dispositivo Móvil Físico (Mockup de Smartphone) -->
-    <div class="phone-device">
-      <!-- Isla Dinámica Superior -->
-      <div class="phone-dynamic-island">
-        <span class="island-camera-dot"></span>
-      </div>
-
-      <!-- Barra de Estado del Teléfono -->
-      <div class="phone-status-bar">
-        <span>19:42</span>
-        <div class="status-bar-icons">
-          <span>5G</span>
-          <span>100%</span>
-        </div>
-      </div>
-
-      <!-- Cabecera de la App Móvil -->
+  <!-- Escenario de la Aplicacion Movil Nativa -->
+  <main class="live-app-stage">
+    <!-- Contenedor Directo de la Aplicacion Movil (Sin marco artificial de smartphone) -->
+    <div class="live-app-card" id="live-app-card">
+      <!-- Cabecera de la Aplicacion de Compra -->
       <header class="phone-app-header">
         <div class="phone-app-brand">
           <img src="./CECILIA%20TEDIN%20LIVE%20%C2%B7%20Pedidos%20por%20WhatsApp_files/57936c4e7aa42d4fdf61e33615a19e2525ccbde2e2fb24cf69b07554b99a0174.jpg" alt="Cecilia Tedin">
-          <span>CECILIA TEDIN</span>
+          <div>
+            <span style="font-family:var(--font-serif);font-weight:700;font-size:14px;letter-spacing:0.04em;">CECILIA TEDIN</span>
+            <div style="font-size:9.5px;color:var(--ct-muted);text-transform:uppercase;letter-spacing:0.1em;">Venta Rapida LIVE</div>
+          </div>
         </div>
         <span class="phone-live-pill">TIKTOK LIVE</span>
       </header>
@@ -334,62 +289,17 @@
         </div>
       </div>
 
-      <!-- Barra Flotante Inferior de la Orden Móvil (Pasos 1, 2 y 3) -->
+      <!-- Barra Flotante Inferior de la Orden Movil (Pasos 1, 2 y 3) -->
       <div class="mobile-cart-tray" id="mobile-cart-tray">
         <div>
           <div class="tray-info-text" id="tray-count-text">1 prenda seleccionada</div>
-          <div class="tray-total-price" id="tray-total-text">480 Bs.</div>
+          <div class="tray-total-price" id="tray-total-text">180 Bs.</div>
         </div>
         <button type="button" class="btn-tray-next" onclick="window.CTApp.onMobileTrayNext()">
           Continuar &rarr;
         </button>
       </div>
-
-      <!-- Barra Inferior de Inicio (Home Bar) -->
-      <div class="phone-home-indicator-wrap">
-        <div class="phone-home-indicator"></div>
-      </div>
     </div>
-
-    <!-- Columna Lateral Derecha: Impacto en el Panel Administrativo -->
-    <aside class="stage-info-column">
-      <div class="stage-card">
-        <span class="hero-tag" style="margin-bottom:12px;">Sincronización Total</span>
-        <h3>Conexión con Panel Admin</h3>
-        <p>
-          Cada orden generada en este celular se sincroniza inmediatamente con el almacenamiento local y se refleja en el Panel Administrativo Central:
-        </p>
-        <div class="stage-feature-list">
-          <div class="stage-feature-item">
-            <span class="stage-feature-num">01</span>
-            <div>
-              <strong>Reserva Automática:</strong>
-              <p>Las prendas de la orden quedan reservadas protegiendo el stock real vendible.</p>
-            </div>
-          </div>
-          <div class="stage-feature-item">
-            <span class="stage-feature-num">02</span>
-            <div>
-              <strong>Trazabilidad Logística:</strong>
-              <p>El encargado visualiza si el pedido es para retiro en local, delivery local con GPS o encomienda nacional.</p>
-            </div>
-          </div>
-          <div class="stage-feature-item">
-            <span class="stage-feature-num">03</span>
-            <div>
-              <strong>Aprobación de Pago QR:</strong>
-              <p>Al confirmar el comprobante en el Backoffice, la reserva se convierte en salida definitiva y se registra en caja.</p>
-            </div>
-          </div>
-        </div>
-
-        <div style="margin-top:24px;border-top:1px solid var(--ct-line);padding-top:16px;">
-          <a href="admin.html" class="btn-primary-ct" style="text-decoration:none;display:flex;justify-content:center;padding:12px;font-size:12.5px;">
-            Abrir Panel Administrativo &rarr;
-          </a>
-        </div>
-      </div>
-    </aside>
   </main>
 
   <!-- Bandeja de Notificaciones Toast -->

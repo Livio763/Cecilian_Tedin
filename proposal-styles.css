@@ -2643,7 +2643,208 @@ body {
   font-size: 18px;
 }
 
-/* Responsive adjustments */
+/* ==========================================================================
+   ELEMENTOS DE INTERFAZ MOVIL NATIVOS (DRAWER Y BACKOFFICE)
+   ========================================================================== */
+.mobile-menu-toggle-btn {
+  display: none;
+}
+
+.storefront-mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(22, 26, 18, 0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 2200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.storefront-mobile-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.storefront-mobile-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 310px;
+  max-width: 86vw;
+  background: #faf8f3;
+  z-index: 2210;
+  transform: translateX(-100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 10px 0 35px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.storefront-mobile-drawer.open {
+  transform: translateX(0);
+}
+
+.storefront-mobile-nav-link {
+  display: block;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: var(--ct-ink);
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.storefront-mobile-nav-link:hover,
+.storefront-mobile-nav-link:active {
+  background: #efece1;
+  color: var(--ct-olive);
+}
+
+/* Panel Administrativo: Barra Movil, Pildoras y Off-canvas */
+.admin-mobile-topbar {
+  display: none;
+  background: #1e241b;
+  color: #fff;
+  padding: 10px 16px;
+  border-bottom: 1px solid #2e3629;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.btn-admin-mobile-menu {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.admin-menu-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.admin-mobile-title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 13.5px;
+  color: #d8b370;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 50%;
+}
+
+.btn-admin-mobile-back {
+  color: #c7cebc;
+  text-decoration: none;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.admin-quick-pills-bar {
+  display: none;
+  background: #252c21;
+  padding: 8px 14px;
+  gap: 8px;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  border-bottom: 1px solid #333d2e;
+}
+
+.admin-quick-pills-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.admin-quick-pill {
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #c7cebc;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.admin-quick-pill.active {
+  background: var(--ct-olive);
+  border-color: var(--ct-olive);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.quick-pill-badge {
+  background: var(--ct-wine);
+  color: #fff;
+  font-size: 9.5px;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 999px;
+}
+
+.admin-sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  z-index: 1290;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.admin-sidebar-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.admin-sidebar-close-btn {
+  display: none;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  place-items: center;
+}
+
+/* ==========================================================================
+   REGLAS RESPONSIVAS MULTI-DISPOSITIVO
+   ========================================================================== */
 @media (max-width: 1100px) {
   .presentation-bar { padding: 0 16px; }
   .presentation-brand h1 { display: none; }
@@ -2651,17 +2852,186 @@ body {
   .hero-media-wrap { height: 380px; }
   .proposal-pillars-bar { grid-template-columns: repeat(2, 1fr); }
   .quiz-main-layout { grid-template-columns: 1fr; }
-  .admin-wrapper { grid-template-columns: 1fr; }
-  .admin-sidebar { display: none; } /* En móvil se puede desplegar */
   .kpi-grid { grid-template-columns: repeat(2, 1fr); }
   .pos-layout { grid-template-columns: 1fr; height: auto; }
+
+  /* Adaptacion del Panel Administrativo a Pantalla Mediana / Movil */
+  .admin-wrapper {
+    display: block;
+    grid-template-columns: 1fr;
+    position: relative;
+  }
+  .admin-mobile-topbar {
+    display: flex;
+  }
+  .admin-quick-pills-bar {
+    display: flex;
+  }
+  .admin-sidebar {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 290px;
+    max-width: 86vw;
+    z-index: 1300;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 6px 0 30px rgba(0, 0, 0, 0.4);
+    overflow-y: auto;
+  }
+  .admin-sidebar.open {
+    transform: translateX(0);
+  }
+  .admin-sidebar-close-btn {
+    display: grid;
+  }
+  .admin-content-area {
+    padding: 18px 14px 40px;
+  }
+  .admin-charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 992px) {
+  .header-menu-links {
+    display: none !important;
+  }
+  .header-search-wrapper {
+    display: none !important;
+  }
+  .mobile-menu-toggle-btn {
+    display: inline-flex;
+  }
+  .top-portal-bar {
+    padding: 8px 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .top-portal-links {
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 11px;
+  }
 }
 
 @media (max-width: 768px) {
   .proposal-pillars-bar { grid-template-columns: 1fr; }
   .kpi-grid { grid-template-columns: 1fr; }
   .quiz-stepper { grid-template-columns: repeat(2, 1fr); }
-  .hero-content { padding: 36px 24px; }
+  .hero-content { padding: 32px 18px; }
+
+  /* Catalogo fluido a 2 columnas en movil */
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .product-card {
+    padding: 8px;
+    border-radius: 18px;
+  }
+  .card-img-wrap {
+    height: 195px;
+    border-radius: 14px;
+  }
+  .card-info {
+    padding: 8px 4px 4px;
+  }
+  .card-info h3 {
+    font-size: 13px;
+    line-height: 1.3;
+  }
+  .card-price {
+    font-size: 13px;
+  }
+  .card-actions-row {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .card-actions-row .btn-primary-ct,
+  .card-actions-row .btn-secondary-ct {
+    width: 100%;
+    text-align: center;
+    padding: 8px 6px;
+    font-size: 11px;
+  }
+
+  /* Pildoras de categoria con deslizamiento tactil horizontal */
+  .category-pills {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 6px;
+  }
+  .category-pills::-webkit-scrollbar {
+    display: none;
+  }
+  .cat-pill {
+    flex-shrink: 0;
+    padding: 7px 14px;
+    font-size: 11.5px;
+  }
+
+  /* Modal de producto responsive */
+  .modal-grid {
+    grid-template-columns: 1fr;
+  }
+  .modal-media {
+    height: 240px;
+    border-radius: 24px 24px 0 0;
+  }
+  .modal-box {
+    width: 95%;
+    max-height: 92vh;
+    border-radius: 20px;
+    margin: 12px auto;
+  }
+  .modal-info {
+    padding: 20px 18px 24px;
+  }
+
+  /* Tablas protegidas con scroll horizontal suave */
+  .formal-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 12px;
+  }
+  .formal-table {
+    min-width: 620px;
+  }
+
+  /* Evitar zoom automatico molesto en iOS */
+  input[type="text"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="search"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .card-img-wrap {
+    height: 165px;
+  }
+  .card-tag {
+    font-size: 8.5px;
+    padding: 2px 6px;
+  }
+  .cart-drawer {
+    width: 100%;
+    padding: 20px 16px;
+  }
 }
 
 /* ==========================================================================
@@ -2746,74 +3116,62 @@ body {
   flex-shrink: 0;
 }
 
-/* El Dispositivo Móvil Físico */
-.phone-device {
-  width: 410px;
-  max-width: 100%;
-  height: 840px;
-  background: #141712;
-  border-radius: 54px;
-  border: 12px solid #23281e;
-  box-shadow:
-    0 0 0 2px #3c4434,
-    0 30px 85px rgba(20, 24, 16, 0.45);
-  position: relative;
-  overflow: hidden;
+/* ==========================================================================
+   CUESTIONARIO MOVIL NATIVO LIVE (SIN BISELES NI BORDES SIMULADOS)
+   ========================================================================== */
+.live-app-stage {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  min-height: calc(100vh - 40px);
+  background: var(--ct-bg);
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.live-app-card {
+  width: 100%;
+  max-width: 500px;
+  min-height: 100vh;
+  background: #faf8f3;
   display: flex;
   flex-direction: column;
-  user-select: none;
+  position: relative;
+  box-sizing: border-box;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+  border-left: 1px solid var(--ct-line);
+  border-right: 1px solid var(--ct-line);
 }
 
-/* Isla Dinámica / Notch */
-.phone-dynamic-island {
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 110px;
-  height: 25px;
-  background: #000;
-  border-radius: 20px;
-  z-index: 200;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 0 10px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+@media (min-width: 769px) {
+  .live-app-stage {
+    padding: 24px 16px 40px;
+  }
+  .live-app-card {
+    border-radius: 26px;
+    border: 1px solid var(--ct-line);
+    min-height: 85vh;
+    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+  }
 }
 
-.island-camera-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: #111e15;
-  border: 1px solid #1f3325;
+@media (max-width: 768px) {
+  .live-app-stage {
+    padding: 0;
+  }
+  .live-app-card {
+    max-width: 100%;
+    min-height: 100vh;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
 }
 
-/* Barra de Estado Móvil */
-.phone-status-bar {
-  height: 42px;
-  padding: 10px 24px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 11.5px;
-  font-weight: 700;
-  color: #22261d;
-  background: #faf8f3;
-  z-index: 100;
-  flex-shrink: 0;
-}
-
-.status-bar-icons {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 10px;
-  font-weight: 600;
-}
-
-/* Pantalla del Teléfono */
+/* Pantalla del Cuestionario con Scroll Suave */
 .phone-screen {
   flex: 1;
   background: #faf8f3;
@@ -2824,6 +3182,7 @@ body {
   position: relative;
   scrollbar-width: thin;
   scrollbar-color: #d8ddcf transparent;
+  padding-bottom: 24px;
 }
 
 .phone-screen::-webkit-scrollbar {
@@ -2832,23 +3191,6 @@ body {
 .phone-screen::-webkit-scrollbar-thumb {
   background: #d8ddcf;
   border-radius: 4px;
-}
-
-/* Barra Inferior de Inicio (Home Indicator) */
-.phone-home-indicator-wrap {
-  background: #faf8f3;
-  padding: 6px 0 8px;
-  flex-shrink: 0;
-  border-top: 1px solid #edebe1;
-  z-index: 100;
-}
-
-.phone-home-indicator {
-  width: 125px;
-  height: 4px;
-  background: #2b3024;
-  border-radius: 4px;
-  margin: 0 auto;
 }
 
 /* Cabecera Interna de la App Móvil */
@@ -3136,19 +3478,22 @@ body {
 
 /* Barra Flotante Inferior de la Orden Móvil */
 .mobile-cart-tray {
-  position: absolute;
+  position: sticky;
   bottom: 0;
   left: 0;
   right: 0;
   background: rgba(26, 31, 22, 0.96);
-  backdrop-filter: blur(12px);
-  padding: 10px 16px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 12px 18px;
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
   display: flex;
   align-items: center;
   justify-content: space-between;
   color: #fff;
-  z-index: 95;
+  z-index: 200;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .tray-info-text {
