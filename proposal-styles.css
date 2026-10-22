@@ -69,7 +69,8 @@ body {
   color: var(--ct-ink);
   line-height: 1.6;
   overflow-x: hidden;
-  padding-top: 76px; /* Para la barra de control fija */
+  padding-top: 0;
+  margin: 0;
 }
 
 /* ==========================================================================
