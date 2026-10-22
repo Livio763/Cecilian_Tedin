@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CECILIA TEDIN · Propuesta Integral E-commerce & Sistema Administrativo</title>
+
+  <!-- Estilos base originales de la marca -->
+  <link rel="stylesheet" href="./CECILIA%20TEDIN%20LIVE%20%C2%B7%20Pedidos%20por%20WhatsApp_files/modern-elegance.css">
+
+  <!-- Estilos de la Propuesta Integral (3 Ventanas / Diapositivas) -->
+  <link rel="stylesheet" href="./proposal-styles.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       ENCABEZADO DE LA TIENDA / DASHBOARD PRINCIPAL (STOREFRONT HEADER)
+       ======================================================================== -->
+  <header class="storefront-header">
+    <!-- Tira Superior de Anuncios y Contacto -->
+    <div class="header-announcement-strip">
+      <div class="announcement-left">
+        <span class="announcement-badge">Showroom Equipetrol</span>
+        <span>Abierto hoy de 10:00 a 20:00 · Envíos prioritarios asegurados a toda Bolivia</span>
+      </div>
+      <div class="announcement-right">
+        <a href="https://api.whatsapp.com/send?phone=59170000000" target="_blank" class="announcement-link">
+          WhatsApp: <strong>+591 70000000</strong>
+        </a>
+        <span>&bull;</span>
+        <a href="#ubicaciones" class="announcement-link">Santa Cruz · Equipetrol</a>
+        <span>&bull;</span>
+        <span>Moneda: <strong>BOB (Bs.)</strong></span>
+      </div>
+    </div>
+
+    <!-- Barra Principal de Navegación -->
+    <nav class="header-main-nav" aria-label="Navegación Principal">
+      <!-- Marca y Logotipo -->
+      <a href="javascript:void(0)" onclick="window.CTApp.switchWindow(1)" class="header-brand-block">
+        <img src="./CECILIA%20TEDIN%20LIVE%20%C2%B7%20Pedidos%20por%20WhatsApp_files/57936c4e7aa42d4fdf61e33615a19e2525ccbde2e2fb24cf69b07554b99a0174.jpg" alt="Cecilia Tedin">
+        <div class="header-brand-titles">
+          <h1>CECILIA TEDIN</h1>
+          <small>ALTA COSTURA · SANTA CRUZ</small>
+        </div>
+      </a>
+
+      <!-- Enlaces de Menú -->
+      <div class="header-menu-links">
+        <a href="#catalogo" class="header-nav-link active">Colección 2026</a>
+        <a href="#quienes-somos" class="header-nav-link">Quiénes Somos</a>
+        <a href="#ubicaciones" class="header-nav-link">Showrooms & Ubicaciones</a>
+        <a href="#pilares" class="header-nav-link">Propuesta de Valor</a>
+        <a href="javascript:void(0)" onclick="window.CTApp.switchWindow(2)" class="header-nav-link" style="color:var(--ct-wine);font-weight:700;">
+          TikTok LIVE
+        </a>
+      </div>
+
+      <!-- Buscador en Vivo Integrado en Header -->
+      <div class="header-search-wrapper">
+        <input type="search" class="header-search-input" id="header-search-input" placeholder="Buscar vestidos, lino, abrigos..." oninput="window.CTApp.onHeaderSearch(this.value)">
+        <span class="header-search-icon">&bull;</span>
+      </div>
+
+      <!-- Acciones de Usuario y Bolsa -->
+      <div class="header-actions-group">
+        <button type="button" class="header-action-btn" onclick="alert('Seguimiento de pedido: Ingresa tu código de orden ej. CT-8040')">
+          <span>Rastrear Pedido</span>
+        </button>
+        <button type="button" class="header-action-btn header-cart-btn" onclick="window.CTApp.openCart()">
+          <span>Bolsa</span>
+          <span class="header-cart-badge cart-count-badge">0</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ========================================================================
+       VENTANA 1: EXPERIENCIA DEL CLIENTE (LANDING & CATÁLOGO CURADO)
+       ======================================================================== -->
+  <main id="window-1" class="proposal-window active">
+
+    <!-- Hero Section Editorial -->
+    <section class="client-hero-banner">
+      <div class="hero-content">
+        <span class="hero-tag">Colección Otoño · Invierno 2026</span>
+        <h2 class="hero-title">Siluetas que definen <em>tu distinción</em></h2>
+        <p class="hero-subtitle">
+          Una plataforma omnicanal diseñada para la mujer contemporánea. Compra desde nuestra tienda exclusiva, accede a beneficios relámpago durante nuestras transmisiones en vivo o solicita asesoría personalizada por WhatsApp.
+        </p>
+        <div class="hero-button-group">
+          <a href="#catalogo" class="btn-primary-ct" style="text-decoration:none;">
+            <span>Explorar Catálogo</span> <span>&darr;</span>
+          </a>
+          <button class="btn-secondary-live" onclick="window.CTApp.switchWindow(2)">
+            <span>Comprar en TikTok LIVE</span> <span>&rarr;</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-media-wrap">
+        <img src="./CECILIA%20TEDIN%20LIVE%20%C2%B7%20Pedidos%20por%20WhatsApp_files/544a0b47c6b0a3c186eeda32c60626117b45296deead81df6f3b6f3815b29cbf.jpg" alt="Look Editorial Cecilia Tedin">
+        <div class="hero-floating-card">
+          <div class="badge-icon">CT</div>
+          <div>
+            <div class="text-title">Look Editorial En Vivo</div>
+            <div class="text-highlight">Conjunto Sastrero Lino Oliva</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Barra de 4 Pilares de la Propuesta -->
+    <section id="pilares" class="proposal-pillars-bar">
+      <div class="pillar-item">
+        <div class="pillar-icon">01</div>
+        <div class="pillar-info">
+          <h4>4 Canales Conectados</h4>
+          <p>Web, TikTok LIVE, WhatsApp directo y POS presencial con catálogo e inventario unificados.</p>
+        </div>
+      </div>
+      <div class="pillar-item">
+        <div class="pillar-icon">02</div>
+        <div class="pillar-info">
+          <h4>Reserva de Stock</h4>
+          <p>Los pedidos pendientes retienen reserva temporal (45 min) garantizando stock vendible real.</p>
+        </div>
+      </div>
+      <div class="pillar-item">
+        <div class="pillar-icon">03</div>
+        <div class="pillar-info">
+          <h4>Pagos QR Idempotentes</h4>
+          <p>Verificación visual de comprobantes por personal autorizado sin duplicar salidas ni ingresos.</p>
+        </div>
+      </div>
+      <div class="pillar-item">
+        <div class="pillar-icon">04</div>
+        <div class="pillar-info">
+          <h4>Delivery con GPS</h4>
+          <p>Geolocalización en mapa interactivo con coordenadas y cálculo de cotización exacto.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Banner de Campaña LIVE Activa -->
+    <section class="live-campaign-strip">
+      <div class="live-strip-left">
+        <span class="live-badge-glow">EN VIVO</span>
+        <p>
+          Estamos transmitiendo en TikTok: <strong>Usa el cupón TIKTOK2X1</strong> para obtener 2x1 en prendas elegibles o 50% en la 2ª prenda.
+        </p>
+      </div>
+      <button class="btn-open-quiz" onclick="window.CTApp.switchWindow(2)">
+        <span>Abrir Cuestionario Rápido</span> <span>&rarr;</span>
+      </button>
+    </section>
+
+    <!-- Catálogo Curado de Prendas -->
+    <section id="catalogo" class="catalog-section">
+      <div class="catalog-header">
+        <div>
+          <h3>Catálogo Exclusivo</h3>
+          <p>Prendas confeccionadas con tejidos nobles, cortes precisos y disponibilidades en tiempo real.</p>
+        </div>
+        <div style="font-size:12px;color:var(--ct-muted);">
+          Mostrando prendas de demostración con stock en vivo
+        </div>
+      </div>
+
+      <!-- Barra de Filtros Interactivos -->
+      <div class="filter-bar">
+        <div class="category-pills">
+          <button class="cat-pill active" onclick="window.CTApp.filterCategory('all', this)">Todas las Prendas</button>
+          <button class="cat-pill" onclick="window.CTApp.filterCategory('vestidos', this)">Vestidos de Gala</button>
+          <button class="cat-pill" onclick="window.CTApp.filterCategory('conjuntos', this)">Conjuntos Sastreros</button>
+          <button class="cat-pill" onclick="window.CTApp.filterCategory('blusas', this)">Blusas & Tops</button>
+          <button class="cat-pill" onclick="window.CTApp.filterCategory('edicion-live', this)">Edición LIVE</button>
+          <button class="cat-pill" onclick="window.CTApp.filterCategory('abrigos', this)">Abrigos & Capas</button>
+        </div>
+
+        <div class="filter-actions">
+          <select class="filter-select" onchange="alert('Filtro de ordenamiento aplicado')">
+            <option>Ordenar por: Destacados</option>
+            <option>Precio: Menor a Mayor</option>
+            <option>Precio: Mayor a Menor</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Grilla de Productos Dinámica -->
+      <div id="products-grid" class="products-grid">
+        <!-- Renderizado dinámico desde app.js -->
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SECCIÓN: QUIÉNES SOMOS (HISTORIA, FILOSOFÍA Y ALTA COSTURA)
+         ======================================================================== -->
+    <section id="quienes-somos" class="about-section">
+      <div class="about-header-wrap">
+        <span class="hero-tag">Atelier & Trayectoria</span>
+        <h2>La Esencia de Cecilia Tedin</h2>
+        <p>
+          Alta costura concebida desde Santa Cruz de la Sierra para la mujer contemporánea: patronaje sastre de precisión, tejidos nobles importados y confección artesanal impecable.
+        </p>
+      </div>
+
+      <div class="about-layout-grid">
+        <!-- Tarjeta Visual Editorial -->
+        <div class="about-media-card">
+          <img src="./CECILIA%20TEDIN%20LIVE%20%C2%B7%20Pedidos%20por%20WhatsApp_files/2b8a2e2d83274640156942e53fa6c5c04e22851fc37ecbcf0cfd1d8cf4248555.jpg" alt="Atelier Cecilia Tedin">
+          <div class="about-floating-quote">
+            <p>
+              "La distinción verdadera no busca llamar la atención con excesos, sino permanecer en la memoria por la perfección de su caída, su estructura y su elegancia natural."
+            </p>
+            <span>Cecilia Tedin · Directora Creativa</span>
+          </div>
+        </div>
+
+        <!-- Manifiesto e Historia -->
+        <div class="about-story-content">
+          <div class="about-tagline">
+            Elegancia atemporal con el sello de la maestría artesanal boliviana.
+          </div>
+
+          <div class="about-paragraphs">
+            <p style="margin-bottom:14px;">
+              Fundada en Santa Cruz de la Sierra, la firma <strong>Cecilia Tedin</strong> representa un diálogo constante entre el clasicismo sastre y las siluetas modernas. Cada prenda se concibe en nuestro atelier propio, donde sastres y modistas de amplia experiencia cuidan milimétricamente el corte, las entretelas y los remates a mano.
+            </p>
+            <p>
+              Seleccionamos exclusivamente fibras nobles como el lino 100% europeo, sedas fluidas, crepés estructurados y lanas peinadas, garantizando frescura para el clima cruceño y presencia imponente en eventos de gala a nivel nacional.
+            </p>
+          </div>
+
+          <!-- Cuadrícula de 4 Pilares de Marca -->
+          <div class="about-pillars-grid">
+            <div class="about-pillar-box">
+              <div class="about-pillar-num">01</div>
+              <h4>Patronaje Anatómico</h4>
+              <p>Cortes calculados para realzar y estilizar la figura con comodidad absoluta.</p>
+            </div>
+            <div class="about-pillar-box">
+              <div class="about-pillar-num">02</div>
+              <h4>Materiales Nobles</h4>
+              <p>Linos puros, sedas naturales y tejidos certificados de alta resistencia.</p>
+            </div>
+            <div class="about-pillar-box">
+              <div class="about-pillar-num">03</div>
+              <h4>Producción Ética</h4>
+              <p>100% confeccionado por manos expertas en nuestro atelier local de Bolivia.</p>
+            </div>
+            <div class="about-pillar-box">
+              <div class="about-pillar-num">04</div>
+              <h4>Omnicanalidad Total</h4>
+              <p>Atención fluida en showroom físico, tienda web, TikTok LIVE y WhatsApp.</p>
+            </div>
+          </div>
+
+          <!-- Métricas de Trayectoria -->
+          <div class="about-metrics-strip">
+            <div class="about-metric-item">
+              <strong>+8</strong>
+              <span>Años de Creación</span>
+            </div>
+            <div class="about-metric-item">
+              <strong>+15</strong>
+              <span>Colecciones</span>
+            </div>
+            <div class="about-metric-item">
+              <strong>100%</strong>
+              <span>Hecho en Bolivia</span>
+            </div>
+            <div class="about-metric-item">
+              <strong>4</strong>
+              <span>Canales Integrados</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SECCIÓN: UBICACIONES & SHOWROOMS
+         ======================================================================== -->
+    <section id="ubicaciones" class="locations-section">
+      <div class="locations-header-wrap">
+        <span class="hero-tag">Presencia & Boutiques</span>
+        <h2>Nuestras Ubicaciones</h2>
+        <p>
+          Visita nuestro Showroom central en Santa Cruz para probarte prendas y retirar tus pedidos sin costo, o solicita despacho prioritario a cualquier rincón de Bolivia.
+        </p>
+      </div>
+
+      <!-- Cuadrícula de 3 Puntos de Atención -->
+      <div class="locations-cards-grid">
+        <!-- Punto 1: Showroom Central Equipetrol -->
+        <div class="location-card featured">
+          <span class="location-card-tag">Sede Central & Retiro Gratis</span>
+          <h3>Showroom Equipetrol</h3>
+          <p class="location-address">
+            Av. San Martín #800, entre 3er y 4to anillo, Equipetrol Norte (Santa Cruz de la Sierra).
+          </p>
+          <div class="location-detail-list">
+            <div class="location-detail-row">
+              <span>Horario de Atención:</span>
+              <strong>Lun a Sáb · 10:00 a 20:00</strong>
+            </div>
+            <div class="location-detail-row">
+              <span>Retiro de Compras Web/LIVE:</span>
+              <strong style="color:var(--ct-olive);">Sin costo (0 Bs.)</strong>
+            </div>
+            <div class="location-detail-row">
+              <span>Servicios Disponibles:</span>
+              <span>Probadores VIP, Ajustes de sastrería</span>
+            </div>
+            <div class="location-detail-row">
+              <span>Contacto Directo:</span>
+              <strong>+591 70000000</strong>
+            </div>
+          </div>
+          <div class="location-actions-row">
+            <a href="https://api.whatsapp.com/send?phone=59170000000&text=Hola%20Cecilia%20Tedin,%20deseo%20agendar%20una%20visita%20en%20el%20Showroom%20Equipetrol" target="_blank" class="btn-location-action primary">
+              Agendar Visita VIP
+            </a>
+            <button type="button" class="btn-location-action" onclick="alert('Ubicación: Av. San Martín #800, Equipetrol Norte. Coordenadas: -17.7654, -63.1952')">
+              Ver Coordenadas
+            </button>
+          </div>
+        </div>
+
+        <!-- Punto 2: Boutique Hotel Los Tajibos -->
+        <div class="location-card">
+          <span class="location-card-tag">Colección Gala & Eventos</span>
+          <h3>Boutique Los Tajibos</h3>
+          <p class="location-address">
+            Av. San Martín y Calle Los Cusis, Galería Comercial Los Tajibos Hotel (Santa Cruz).
+          </p>
+          <div class="location-detail-list">
+            <div class="location-detail-row">
+              <span>Horario de Atención:</span>
+              <strong>Mar a Dom · 11:00 a 21:00</strong>
+            </div>
+            <div class="location-detail-row">
+              <span>Especialidad:</span>
+              <span>Vestidos de Noche, Madrinas & Novias</span>
+            </div>
+            <div class="location-detail-row">
+              <span>Modalidad:</span>
+              <span>Atención exclusiva con cita previa</span>
+            </div>
+            <div class="location-detail-row">
+              <span>Asesoría de Imagen:</span>
+              <strong>Incluida en sala privada</strong>
+            </div>
+          </div>
+          <div class="location-actions-row">
+            <a href="https://api.whatsapp.com/send?phone=59170000000&text=Hola%20Cecilia%20Tedin,%20deseo%20solicitar%20cita%20en%20la%20Boutique%20Los%20Tajibos" target="_blank" class="btn-location-action primary">
+              Solicitar Cita de Gala
+            </a>
+          </div>
+        </div>
+
+        <!-- Punto 3: Red de Despacho Nacional -->
+        <div class="location-card">
+          <span class="location-card-tag">Cobertura Nacional 24-48h</span>
+          <h3>Envíos a Todo el País</h3>
+          <p class="location-address">
+            Centro de Despacho Logístico con salidas diarias desde Santa Cruz hacia toda Bolivia.
+          </p>
+          <div class="location-detail-list">
+            <div class="location-detail-row">
+              <span>Destinos Habituales:</span>
+              <strong>La Paz, Cbba, Sucre, Tarija, Oruro</strong>
+            </div>
+            <div class="location-detail-row">
+              <span>Tiempo de Tránsito:</span>
+              <span>24 a 48 horas aseguradas</span>
+            </div>
+            <div class="location-detail-row">
+              <span>Tarifa Plana Encomienda:</span>
+              <strong style="color:var(--ct-wine);">40 Bs. con guía de rastreo</strong>
+            </div>
+            <div class="location-detail-row">
+              <span>Embalaje:</span>
+              <span>Funda protectora de alta costura</span>
+            </div>
+          </div>
+          <div class="location-actions-row">
+            <button type="button" class="btn-location-action primary" onclick="window.CTApp.switchWindow(2); window.CTApp.setMobileDeliveryMode('national');">
+              Cotizar Envío Nacional
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjeta Ilustrada con Mapa del Showroom Central -->
+      <div class="location-map-visual-card">
+        <div class="map-visual-info">
+          <span class="location-card-tag" style="background:#e8ede1;color:var(--ct-olive);">Encuéntranos en Equipetrol</span>
+          <h3 style="font-family:var(--font-serif);font-size:24px;margin-bottom:8px;">Showroom Central Cecilia Tedin</h3>
+          <p style="font-size:13.5px;color:var(--ct-muted);line-height:1.6;margin-bottom:16px;">
+            Situado en el corazón de Equipetrol Norte, a pasos de los mejores cafés y hoteles de la ciudad. Contamos con estacionamiento reservado para clientes y probadores climatizados de gran amplitud.
+          </p>
+          <div style="font-size:12.5px;margin-bottom:18px;">
+            <p><strong>Dirección:</strong> Av. San Martín #800, entre 3er y 4to anillo.</p>
+            <p style="margin-top:4px;"><strong>Referencia:</strong> Frente a Edificio Los Laureles, a 2 cuadras de Plaza Brigida.</p>
+          </div>
+          <div>
+            <a href="https://api.whatsapp.com/send?phone=59170000000&text=Hola%20Cecilia%20Tedin,%20solicito%20la%20ubicaci%C3%B3n%20en%20tiempo%20real%20del%20Showroom" target="_blank" class="btn-primary-ct" style="text-decoration:none;display:inline-flex;padding:10px 22px;font-size:12.5px;">
+              Solicitar Ubicación en WhatsApp &rarr;
+            </a>
+          </div>
+        </div>
+
+        <div class="map-visual-canvas">
+          <svg viewBox="0 0 500 280" style="width:100%;height:100%;object-fit:cover;">
+            <rect width="500" height="280" fill="#e2e7d8"/>
+            <path d="M0,80 L500,70" stroke="#cbd3be" stroke-width="26" fill="none"/>
+            <path d="M0,190 L500,200" stroke="#cbd3be" stroke-width="22" fill="none"/>
+            <path d="M140,0 L130,280" stroke="#cbd3be" stroke-width="24" fill="none"/>
+            <path d="M340,0 L350,280" stroke="#cbd3be" stroke-width="26" fill="none"/>
+            <rect x="180" y="100" width="130" height="70" rx="8" fill="#bac4ad"/>
+            <text x="245" y="140" font-family="sans-serif" font-size="11" font-weight="700" fill="#464e3b" text-anchor="middle">AV. SAN MARTÍN</text>
+          </svg>
+          <div class="map-pin-indicator" style="top:44%;left:52%;">
+            <span class="map-pin-badge" style="background:var(--ct-olive);color:#fff;box-shadow:0 6px 16px rgba(0,0,0,0.25);">
+              Showroom Cecilia Tedin
+            </span>
+            <span class="map-pin-icon" style="color:var(--ct-olive);">&bull;</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         FOOTER DE LUJO EDITORIAL
+         ======================================================================== -->
+    <footer class="storefront-luxury-footer">
+      <div class="footer-inner-content">
+        <!-- Columna Marca -->
+        <div class="footer-brand-col">
+          <h3>CECILIA TEDIN</h3>
+          <small>ALTA COSTURA · SANTA CRUZ DE LA SIERRA</small>
+          <p>
+            Piezas de autor creadas con pasión, telas nobles y patronaje impecable. Viste distinción boliviana con proyección internacional.
+          </p>
+        </div>
+
+        <!-- Columna Colecciones -->
+        <div class="footer-links-col">
+          <h4>Colección</h4>
+          <div class="footer-links-list">
+            <a href="#catalogo" class="footer-link-item">Vestidos de Gala</a>
+            <a href="#catalogo" class="footer-link-item">Conjuntos Sastreros</a>
+            <a href="#catalogo" class="footer-link-item">Blusas & Tops de Satén</a>
+            <a href="#catalogo" class="footer-link-item">Abrigos de Cachemira</a>
+            <a href="javascript:void(0)" onclick="window.CTApp.switchWindow(2)" class="footer-link-item" style="color:#ffb8c6;">Edición TikTok LIVE</a>
+          </div>
+        </div>
+
+        <!-- Columna Atención -->
+        <div class="footer-links-col">
+          <h4>Atención al Cliente</h4>
+          <div class="footer-links-list">
+            <a href="#quienes-somos" class="footer-link-item">Nuestra Historia</a>
+            <a href="#ubicaciones" class="footer-link-item">Showrooms & Horarios</a>
+            <a href="javascript:void(0)" onclick="window.CTApp.openCart()" class="footer-link-item">Bolsa de Compras</a>
+            <a href="javascript:void(0)" onclick="window.CTApp.switchWindow(3)" class="footer-link-item">Acceso Backoffice</a>
+          </div>
+        </div>
+
+        <!-- Columna Contacto -->
+        <div class="footer-links-col">
+          <h4>Contacto & Showroom</h4>
+          <div class="footer-links-list">
+            <span class="footer-link-item">Av. San Martín #800, Equipetrol</span>
+            <span class="footer-link-item">WhatsApp: +591 70000000</span>
+            <span class="footer-link-item">Horario: Lun a Sáb 10:00 a 20:00</span>
+            <span class="footer-link-item">Santa Cruz · Bolivia</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>
+          &copy; 2026 CECILIA TEDIN · Propuesta Integral E-commerce Multicanal.
+        </div>
+        <div>
+          Confección 100% Boliviana · Pagos QR Idempotentes · Despacho Nacional
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ========================================================================
+       VENTANA 2: CUESTIONARIO RÁPIDO PARA VENDER (LIVE TIKTOK / CELULAR)
+       ======================================================================== -->
+  <section id="window-2" class="proposal-window">
+    <div class="phone-presentation-stage">
+      <!-- Columna Lateral Izquierda: Contexto de la Experiencia Móvil -->
+      <aside class="stage-info-column">
+        <div class="stage-card">
+          <span class="hero-tag" style="margin-bottom:12px;">Formato Smartphone Nativo</span>
+          <h3>Experiencia Móvil TikTok LIVE</h3>
+          <p>
+            Diseñado exclusivamente para la pantalla de un celular. Los espectadores que ven la transmisión en vivo pueden explorar el catálogo ágil, armar su orden con varias prendas y solicitar su pedido en menos de 60 segundos.
+          </p>
+          <div class="stage-feature-list">
+            <div class="stage-feature-item">
+              <span class="stage-feature-num">01</span>
+              <div>
+                <strong>Catálogo Simplificado:</strong>
+                <p>Navega todas las prendas, elige tallas, colores y añade múltiples artículos a la orden con un toque.</p>
+              </div>
+            </div>
+            <div class="stage-feature-item">
+              <span class="stage-feature-num">02</span>
+              <div>
+                <strong>Cero Fricción:</strong>
+                <p>Sin contraseñas previas. Registro rápido con nombre, celular y notas especiales.</p>
+              </div>
+            </div>
+            <div class="stage-feature-item">
+              <span class="stage-feature-num">03</span>
+              <div>
+                <strong>Modalidad Adaptativa:</strong>
+                <p>Retiro en Showroom (con mapa del local), Delivery local con GPS o Envíos a otros departamentos.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Dispositivo Móvil Físico (Mockup de Smartphone) -->
+      <div class="phone-device">
+        <!-- Isla Dinámica Superior -->
+        <div class="phone-dynamic-island">
+          <span class="island-camera-dot"></span>
+        </div>
+
+        <!-- Barra de Estado del Teléfono -->
+        <div class="phone-status-bar">
+          <span>19:42</span>
+          <div class="status-bar-icons">
+            <span>5G</span>
+            <span>100%</span>
+          </div>
+        </div>
+
+        <!-- Cabecera de la App Móvil -->
+        <header class="phone-app-header">
+          <div class="phone-app-brand">
+            <img src="./CECILIA%20TEDIN%20LIVE%20%C2%B7%20Pedidos%20por%20WhatsApp_files/57936c4e7aa42d4fdf61e33615a19e2525ccbde2e2fb24cf69b07554b99a0174.jpg" alt="Cecilia Tedin">
+            <span>CECILIA TEDIN</span>
+          </div>
+          <span class="phone-live-pill">TIKTOK LIVE</span>
+        </header>
+
+        <!-- Stepper Móvil de 4 Pasos -->
+        <nav class="phone-stepper">
+          <button type="button" class="phone-step-btn active" data-step="1" onclick="window.CTApp.setMobileStep(1)">
+            <span class="step-bullet">1</span>
+            <span>Prendas</span>
+          </button>
+          <button type="button" class="phone-step-btn" data-step="2" onclick="window.CTApp.setMobileStep(2)">
+            <span class="step-bullet">2</span>
+            <span>Datos</span>
+          </button>
+          <button type="button" class="phone-step-btn" data-step="3" onclick="window.CTApp.setMobileStep(3)">
+            <span class="step-bullet">3</span>
+            <span>Entrega</span>
+          </button>
+          <button type="button" class="phone-step-btn" data-step="4" onclick="window.CTApp.setMobileStep(4)">
+            <span class="step-bullet">4</span>
+            <span>Cierre</span>
+          </button>
+        </nav>
+
+        <!-- Pantalla Desplazable del Celular -->
+        <div class="phone-screen" id="phone-screen-container">
+          <!-- PASO 1 MÓVIL: CATÁLOGO ÁGIL SIMPLIFICADO -->
+          <div id="mobile-step-1" class="phone-step-view active">
+            <div class="mobile-catalog-header">
+              <h4>Catálogo Rápido LIVE</h4>
+              <p>Selecciona una o varias prendas anunciadas en la transmisión:</p>
+            </div>
+
+            <!-- Lista de Prendas Simplificadas -->
+            <div class="mobile-products-list" id="mobile-products-list">
+              <!-- Renderizado dinámico desde app.js -->
+            </div>
+          </div>
+
+          <!-- PASO 2 MÓVIL: DATOS PERSONALES Y MENSAJE -->
+          <div id="mobile-step-2" class="phone-step-view">
+            <div class="mobile-catalog-header">
+              <h4>Tus Datos de Contacto</h4>
+              <p>Sin contraseñas. Te contactaremos directo por WhatsApp con el presupuesto oficial:</p>
+            </div>
+
+            <!-- Resumen de prendas agregadas -->
+            <div class="mobile-selected-items-tray" id="mobile-selected-items-preview">
+              <!-- Renderizado dinámico -->
+            </div>
+
+            <div class="form-group-field" style="margin-bottom:12px;">
+              <label style="font-size:10px;">Nombre Completo *</label>
+              <input type="text" id="mobile-customer-name" value="Valeria Montero" placeholder="Tu nombre" style="padding:9px 12px;font-size:12px;">
+            </div>
+
+            <div class="form-group-field" style="margin-bottom:12px;">
+              <label style="font-size:10px;">Celular / WhatsApp *</label>
+              <input type="tel" id="mobile-customer-phone" value="+591 76543210" placeholder="+591 7XXXXXXX" style="padding:9px 12px;font-size:12px;">
+            </div>
+
+            <div class="form-group-field" style="margin-bottom:12px;">
+              <label style="font-size:10px;">Correo Electrónico (Opcional)</label>
+              <input type="email" id="mobile-customer-email" value="valeria.montero@gmail.com" placeholder="correo@ejemplo.com" style="padding:9px 12px;font-size:12px;">
+            </div>
+
+            <div class="form-group-field" style="margin-bottom:16px;">
+              <label style="font-size:10px;">Mensaje o Detalle que Dejar</label>
+              <textarea id="mobile-customer-notes" rows="2" placeholder="Ej: Por favor coordinar envío en horario de la tarde, o consultar disponibilidad de accesorios..." style="padding:9px 12px;font-size:11.5px;border-radius:12px;width:100%;border:1px solid var(--ct-line);background:#fff;"></textarea>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;gap:8px;">
+              <button type="button" class="btn-card-detail" style="padding:8px 14px;" onclick="window.CTApp.setMobileStep(1)">&larr; Prendas</button>
+              <button type="button" class="btn-primary-ct" style="padding:8px 18px;font-size:11.5px;" onclick="window.CTApp.setMobileStep(3)">Entrega &rarr;</button>
+            </div>
+          </div>
+
+          <!-- PASO 3 MÓVIL: MODALIDAD DE ENTREGA (LOCAL, SANTA CRUZ, NACIONAL) -->
+          <div id="mobile-step-3" class="phone-step-view">
+            <div class="mobile-catalog-header">
+              <h4>Modalidad de Entrega</h4>
+              <p>Selecciona cómo deseas recibir tu pedido:</p>
+            </div>
+
+            <!-- Tabs de 3 Modalidades -->
+            <div class="delivery-mode-tabs">
+              <button type="button" class="btn-mode-tab active" data-mode="showroom" onclick="window.CTApp.setMobileDeliveryMode('showroom', this)">
+                Retiro Local
+              </button>
+              <button type="button" class="btn-mode-tab" data-mode="delivery_local" onclick="window.CTApp.setMobileDeliveryMode('delivery_local', this)">
+                Delivery SCZ
+              </button>
+              <button type="button" class="btn-mode-tab" data-mode="national" onclick="window.CTApp.setMobileDeliveryMode('national', this)">
+                Nacional
+              </button>
+            </div>
+
+            <!-- Subpanel 1: Recoger en Local (Showroom) -->
+            <div id="delivery-panel-showroom" class="delivery-subpanel active">
+              <div class="simulated-map-container" style="height:140px;">
+                <svg class="map-svg-canvas" viewBox="0 0 400 140">
+                  <rect width="400" height="140" fill="#e4e8dc"/>
+                  <path d="M0,40 L400,45" stroke="#cbd3c0" stroke-width="20" fill="none"/>
+                  <path d="M120,0 L130,140" stroke="#cbd3c0" stroke-width="18" fill="none"/>
+                  <path d="M260,0 L250,140" stroke="#cbd3c0" stroke-width="20" fill="none"/>
+                  <rect x="145" y="55" width="90" height="45" rx="6" fill="#bcc7af"/>
+                </svg>
+                <div class="map-pin-indicator" style="top:55%;left:48%;">
+                  <span class="map-pin-badge" style="background:var(--ct-olive);">Showroom Cecilia Tedin</span>
+                  <span class="map-pin-icon" style="color:var(--ct-olive);">&bull;</span>
+                </div>
+              </div>
+              <div class="showroom-info-box">
+                <h5>Showroom Central Cecilia Tedin</h5>
+                <p>Av. San Martín #800, entre 3er y 4to anillo, Equipetrol (Santa Cruz).</p>
+                <p style="margin-top:4px;"><strong>Horario de Retiro:</strong> Lunes a Sábado de 10:00 a 20:00.</p>
+                <p style="color:var(--ct-olive);font-weight:700;margin-top:4px;">Sin costo adicional (0 Bs.)</p>
+              </div>
+            </div>
+
+            <!-- Subpanel 2: Delivery Santa Cruz con Mapa GPS -->
+            <div id="delivery-panel-delivery_local" class="delivery-subpanel">
+              <div class="simulated-map-container" style="height:150px;" onclick="window.CTApp.onMobileMapClick(event)">
+                <svg class="map-svg-canvas" viewBox="0 0 400 150">
+                  <rect width="400" height="150" fill="#e8ede1"/>
+                  <path d="M0,50 L400,40" stroke="#d5decb" stroke-width="20" fill="none"/>
+                  <path d="M100,0 L110,150" stroke="#d5decb" stroke-width="16" fill="none"/>
+                  <path d="M280,0 L270,150" stroke="#d5decb" stroke-width="20" fill="none"/>
+                  <text x="10" y="20" fill="#727e69" font-size="9" font-weight="600">Toca el mapa para fijar tu pin GPS</text>
+                </svg>
+                <div id="mobile-map-pin" class="map-pin-indicator" style="top:50%;left:50%;">
+                  <span class="map-pin-badge">Tu Ubicación</span>
+                  <span class="map-pin-icon">&bull;</span>
+                </div>
+              </div>
+
+              <div class="map-coords-bar" style="font-size:9.5px;padding:5px 10px;">
+                <span>GPS: <strong id="mobile-coords-val">-17.7654, -63.1952</strong></span>
+                <span style="color:var(--ct-olive);">Cotizado: 25 Bs.</span>
+              </div>
+
+              <div class="form-group-field" style="margin-top:8px;margin-bottom:8px;">
+                <label style="font-size:10px;">Dirección Principal *</label>
+                <input type="text" id="mobile-address-street" value="Equipetrol Norte, Calle 7 #45" placeholder="Zona, calle, número" style="padding:8px 10px;font-size:11.5px;">
+              </div>
+
+              <div class="form-group-field" style="margin-bottom:12px;">
+                <label style="font-size:10px;">Detalle de la Dirección (Piso / Dpto / Ref.)</label>
+                <input type="text" id="mobile-address-detail" value="Edificio Los Laureles, Apto 402, frente a plaza" placeholder="Edificio, timbre, indicaciones" style="padding:8px 10px;font-size:11.5px;">
+              </div>
+            </div>
+
+            <!-- Subpanel 3: Envío a Otro Departamento (Nacional) -->
+            <div id="delivery-panel-national" class="delivery-subpanel">
+              <div class="form-group-field" style="margin-bottom:10px;">
+                <label style="font-size:10px;">Departamento de Destino *</label>
+                <select id="mobile-national-dept" style="width:100%;padding:9px;border-radius:12px;border:1px solid var(--ct-line);font-size:11.5px;">
+                  <option value="La Paz">La Paz</option>
+                  <option value="Cochabamba">Cochabamba</option>
+                  <option value="Sucre">Sucre / Chuquisaca</option>
+                  <option value="Tarija">Tarija</option>
+                  <option value="Oruro">Oruro</option>
+                  <option value="Potosí">Potosí</option>
+                  <option value="Beni">Beni (Trinidad)</option>
+                  <option value="Pando">Pando (Cobija)</option>
+                </select>
+              </div>
+
+              <div class="form-group-field" style="margin-bottom:10px;">
+                <label style="font-size:10px;">Ciudad o Municipio</label>
+                <input type="text" id="mobile-national-city" value="La Paz - Calacoto" placeholder="Ciudad o localidad" style="padding:8px 10px;font-size:11.5px;">
+              </div>
+
+              <div class="form-group-field" style="margin-bottom:10px;">
+                <label style="font-size:10px;">Agencia de Envío / Terminal o Domicilio</label>
+                <input type="text" id="mobile-national-agency" value="Terminal Central / Encomienda Aérea" placeholder="Ej: Flota Bolívar, Terminal Bimodal o Courier" style="padding:8px 10px;font-size:11.5px;">
+              </div>
+
+              <div style="background:#eaf0fc;border:1px solid #c9d8f5;border-radius:12px;padding:8px 10px;font-size:10.5px;color:#1e4387;margin-bottom:12px;">
+                Tarifa de encomienda nacional cotizada: <strong>40 Bs.</strong> (Despacho con código de guía).
+              </div>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;gap:8px;margin-top:14px;">
+              <button type="button" class="btn-card-detail" style="padding:8px 14px;" onclick="window.CTApp.setMobileStep(2)">&larr; Datos</button>
+              <button type="button" class="btn-primary-ct" style="padding:8px 18px;font-size:11.5px;" onclick="window.CTApp.setMobileStep(4)">Revisar &rarr;</button>
+            </div>
+          </div>
+
+          <!-- PASO 4 MÓVIL: RESUMEN FINAL, CUPÓN Y CIERRE -->
+          <div id="mobile-step-4" class="phone-step-view">
+            <div class="mobile-catalog-header">
+              <h4>Confirmación de Orden</h4>
+              <p>Revisa el desglose antes de enviar tu mensaje a WhatsApp:</p>
+            </div>
+
+            <!-- Desglose de prendas -->
+            <div class="mobile-selected-items-tray" id="mobile-final-items-list">
+              <!-- Renderizado dinámico -->
+            </div>
+
+            <!-- Cupón LIVE -->
+            <div class="live-coupon-box" style="padding:10px;margin-bottom:12px;">
+              <div class="code" style="font-size:13px;">TIKTOK2X1</div>
+              <p style="font-size:10px;">Cupón validado: Descuento 2x1 o beneficio LIVE aplicado.</p>
+            </div>
+
+            <!-- Resumen de Costos -->
+            <div class="cart-totals" style="padding:10px;font-size:11.5px;margin-bottom:14px;">
+              <div class="total-row">
+                <span>Subtotal Prendas:</span>
+                <strong id="mobile-subtotal-val">0 Bs.</strong>
+              </div>
+              <div class="total-row">
+                <span>Descuento Promocional:</span>
+                <strong id="mobile-discount-val" style="color:var(--ct-wine)">0 Bs.</strong>
+              </div>
+              <div class="total-row">
+                <span>Costo de Envío:</span>
+                <strong id="mobile-delivery-cost-val">0 Bs.</strong>
+              </div>
+              <div class="total-row final" style="font-size:14px;padding-top:6px;margin-top:6px;">
+                <span>Total Estimado:</span>
+                <strong id="mobile-final-total-val" style="color:var(--ct-wine)">0 Bs.</strong>
+              </div>
+            </div>
+
+            <!-- Detalles de Destino y Mensaje -->
+            <div style="background:#fff;border:1px solid var(--ct-line);border-radius:12px;padding:10px;font-size:11px;margin-bottom:16px;">
+              <div><strong>Comprador:</strong> <span id="mobile-summary-customer">Valeria Montero</span></div>
+              <div style="margin-top:3px;"><strong>Modalidad:</strong> <span id="mobile-summary-delivery">Delivery</span></div>
+              <div style="margin-top:3px;"><strong>Ubicación/Destino:</strong> <span id="mobile-summary-address">Equipetrol</span></div>
+              <div style="margin-top:3px;color:var(--ct-muted);"><strong>Mensaje:</strong> <span id="mobile-summary-notes">Ninguno</span></div>
+            </div>
+
+            <button type="button" class="btn-checkout-whatsapp" style="padding:12px;font-size:12.5px;width:100%;margin-bottom:10px;" onclick="window.CTApp.finishMobileOrder()">
+              Solicitar Pedido por WhatsApp
+            </button>
+
+            <button type="button" class="btn-card-detail" style="width:100%;padding:8px;" onclick="window.CTApp.setMobileStep(3)">
+              &larr; Modificar Entrega
+            </button>
+          </div>
+        </div>
+
+        <!-- Barra Flotante Inferior de la Orden Móvil (Visible en pasos 1, 2 y 3) -->
+        <div class="mobile-cart-tray" id="mobile-cart-tray">
+          <div>
+            <div class="tray-info-text" id="tray-count-text">1 prenda seleccionada</div>
+            <div class="tray-total-price" id="tray-total-text">480 Bs.</div>
+          </div>
+          <button type="button" class="btn-tray-next" onclick="window.CTApp.onMobileTrayNext()">
+            Continuar &rarr;
+          </button>
+        </div>
+
+        <!-- Barra Inferior de Inicio (Home Bar) -->
+        <div class="phone-home-indicator-wrap">
+          <div class="phone-home-indicator"></div>
+        </div>
+      </div>
+
+      <!-- Columna Lateral Derecha: Impacto en el Panel Administrativo -->
+      <aside class="stage-info-column">
+        <div class="stage-card">
+          <span class="hero-tag" style="margin-bottom:12px;">Backoffice Conectado</span>
+          <h3>Gestión en Panel Admin</h3>
+          <p>
+            Cada orden solicitada en este celular se sincroniza inmediatamente con el Panel Administrativo Central (Ventana 3):
+          </p>
+          <div class="stage-feature-list">
+            <div class="stage-feature-item">
+              <span class="stage-feature-num">01</span>
+              <div>
+                <strong>Reserva de Inventario:</strong>
+                <p>Las prendas de la orden quedan reservadas por 45 minutos protegiendo el stock real.</p>
+              </div>
+            </div>
+            <div class="stage-feature-item">
+              <span class="stage-feature-num">02</span>
+              <div>
+                <strong>Despacho Logístico:</strong>
+                <p>El encargado visualiza si el pedido es para retiro en local, delivery local con GPS o encomienda nacional.</p>
+              </div>
+            </div>
+            <div class="stage-feature-item">
+              <span class="stage-feature-num">03</span>
+              <div>
+                <strong>Verificación QR Idempotente:</strong>
+                <p>Al confirmar el comprobante, la reserva se convierte en salida definitiva y se registra en caja.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       VENTANA 3: PANEL ADMINISTRATIVO FORMAL (BACKOFFICE INTEGRAL)
+       ======================================================================== -->
+  <section id="window-3" class="proposal-window">
+    <div class="admin-wrapper">
+      <!-- Sidebar Corporativo Formal -->
+      <aside class="admin-sidebar">
+        <div class="sidebar-header">
+          <div class="admin-corp-logo">
+            <img src="./CECILIA%20TEDIN%20LIVE%20%C2%B7%20Pedidos%20por%20WhatsApp_files/57936c4e7aa42d4fdf61e33615a19e2525ccbde2e2fb24cf69b07554b99a0174.jpg" alt="Logo">
+            <div class="corp-titles">
+              <h2>CECILIA TEDIN</h2>
+              <span>Panel Operativo Central</span>
+            </div>
+          </div>
+        </div>
+
+        <nav class="admin-nav-menu">
+          <div class="nav-section-title">Operaciones</div>
+          <button class="admin-nav-item active" data-tab="dashboard" onclick="window.CTApp.switchAdminTab('dashboard', this)">
+            <span class="nav-icon">&bull;</span>
+            <span>Dashboard KPIs</span>
+          </button>
+          <button class="admin-nav-item" data-tab="orders" onclick="window.CTApp.switchAdminTab('orders', this)">
+            <span class="nav-icon">&bull;</span>
+            <span>Gestión de Pedidos</span>
+            <span class="nav-count">7</span>
+          </button>
+          <button class="admin-nav-item" data-tab="pos" onclick="window.CTApp.switchAdminTab('pos', this)">
+            <span class="nav-icon">&bull;</span>
+            <span>POS Tienda Física</span>
+          </button>
+          <button class="admin-nav-item" data-tab="manual-order" onclick="window.CTApp.switchAdminTab('manual-order', this)">
+            <span class="nav-icon">&bull;</span>
+            <span>Venta WhatsApp Directo</span>
+          </button>
+
+          <div class="nav-section-title">Catálogo & Stock</div>
+          <button class="admin-nav-item" data-tab="inventory" onclick="window.CTApp.switchAdminTab('inventory', this)">
+            <span class="nav-icon">&bull;</span>
+            <span>Inventario & Reservas</span>
+          </button>
+          <button class="admin-nav-item" data-tab="promos" onclick="window.CTApp.switchAdminTab('promos', this)">
+            <span class="nav-icon">&bull;</span>
+            <span>Promociones & Cupones</span>
+          </button>
+
+          <div class="nav-section-title">Control & Gobierno</div>
+          <button class="admin-nav-item" data-tab="customers" onclick="window.CTApp.switchAdminTab('customers', this)">
+            <span class="nav-icon">&bull;</span>
+            <span>Clientes & Cuentas</span>
+          </button>
+          <button class="admin-nav-item" data-tab="audit" onclick="window.CTApp.switchAdminTab('audit', this)">
+            <span class="nav-icon">&bull;</span>
+            <span>Bitácora de Auditoría</span>
+          </button>
+          <button class="admin-nav-item" data-tab="settings" onclick="window.CTApp.switchAdminTab('settings', this)">
+            <span class="nav-icon">&bull;</span>
+            <span>Configuración</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="user-badge">
+            <div class="user-avatar">AD</div>
+            <div>
+              <div style="font-weight:600;color:#fff;">Admin Central</div>
+              <div style="font-size:9.5px;color:#8f9b84;">Superadministrador</div>
+            </div>
+          </div>
+          <span style="font-size:12px;cursor:pointer;color:#8f9b84;" title="Cerrar sesión">Salir</span>
+        </div>
+      </aside>
+
+      <!-- Área de Contenido Principal -->
+      <main class="admin-content-area">
+        <!-- TAB 1: DASHBOARD GENERAL -->
+        <div id="admin-tab-dashboard" class="admin-view-tab active">
+          <div class="admin-header-row">
+            <div class="admin-page-title">
+              <h2>Dashboard Ejecutivo y Métricas</h2>
+              <p>Resumen unificado de ingresos, pedidos y movimientos en los 4 canales de venta.</p>
+            </div>
+            <div class="admin-header-actions">
+              <span style="font-size:11.5px;color:var(--ct-muted);">Última conciliación: Hoy, 21:00</span>
+            </div>
+          </div>
+
+          <!-- Cuadrícula de KPIs Ejecutivos -->
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-title-row">
+                <span>Ingresos Cobrados</span>
+                <span class="kpi-icon-pill green">Bs</span>
+              </div>
+              <div class="kpi-value" id="kpi-ingresos-cobrados">1,405 Bs.</div>
+              <div class="kpi-subtext">
+                <span class="tag-badge success">Efectivamente recaudado</span> en QR y POS
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-title-row">
+                <span>Pendiente de Cobro</span>
+                <span class="kpi-icon-pill amber">PEN</span>
+              </div>
+              <div class="kpi-value" id="kpi-ingresos-pendientes">1,185 Bs.</div>
+              <div class="kpi-subtext">
+                En cotización o espera de comprobante
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-title-row">
+                <span>Pedidos Totales</span>
+                <span class="kpi-icon-pill blue">PED</span>
+              </div>
+              <div class="kpi-value" id="kpi-total-pedidos">7</div>
+              <div class="kpi-subtext">
+                Consolidados en los 4 canales
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-title-row">
+                <span>Ventas Campaña LIVE</span>
+                <span class="kpi-icon-pill wine">LIVE</span>
+              </div>
+              <div class="kpi-value" id="kpi-ventas-live">2 pedidos</div>
+              <div class="kpi-subtext">
+                Cupón TIKTOK2X1 activo
+              </div>
+            </div>
+          </div>
+
+          <!-- Tabla de Pedidos Recientes -->
+          <div class="admin-card-container">
+            <div class="card-header-bar">
+              <h3>Actividad Reciente de Pedidos (Multicanal)</h3>
+              <button class="btn-tbl-action" onclick="window.CTApp.switchAdminTab('orders', document.querySelector('.admin-nav-item[data-tab=orders]'))">
+                Ver todos los pedidos &rarr;
+              </button>
+            </div>
+
+            <div class="formal-table-wrap">
+              <table class="formal-table">
+                <thead>
+                  <tr>
+                    <th>Código</th>
+                    <th>Canal</th>
+                    <th>Cliente</th>
+                    <th>Prenda(s)</th>
+                    <th>Total</th>
+                    <th>Estado Operativo</th>
+                    <th>Acción</th>
+                  </tr>
+                </thead>
+                <tbody id="dashboard-recent-orders-tbody">
+                  <!-- Renderizado dinámico -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: GESTIÓN FORMAL DE PEDIDOS (8 ESTADOS) -->
+        <div id="admin-tab-orders" class="admin-view-tab">
+          <div class="admin-header-row">
+            <div class="admin-page-title">
+              <h2>Gestión Centralizada de Pedidos</h2>
+              <p>Flujo completo de los 8 estados oficiales del documento con verificación de pagos QR y bitácora.</p>
+            </div>
+          </div>
+
+          <div class="admin-card-container">
+            <div class="card-header-bar">
+              <div class="table-filter-tabs">
+                <button class="tbl-tab-btn active" onclick="window.CTApp.filterAdminOrders('all', this)">Todos los Canales</button>
+                <button class="tbl-tab-btn" onclick="window.CTApp.filterAdminOrders('live', this)">TikTok LIVE</button>
+                <button class="tbl-tab-btn" onclick="window.CTApp.filterAdminOrders('web', this)">Tienda Web</button>
+                <button class="tbl-tab-btn" onclick="window.CTApp.filterAdminOrders('whatsapp', this)">WhatsApp Directo</button>
+                <button class="tbl-tab-btn" onclick="window.CTApp.filterAdminOrders('pos', this)">POS Local</button>
+              </div>
+            </div>
+
+            <div class="formal-table-wrap">
+              <table class="formal-table">
+                <thead>
+                  <tr>
+                    <th>Código / Fecha</th>
+                    <th>Canal</th>
+                    <th>Cliente & Teléfono</th>
+                    <th>Prendas & Modalidad</th>
+                    <th>Total / Cupón</th>
+                    <th>Estado Actual</th>
+                    <th>Gestión</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-orders-tbody">
+                  <!-- Renderizado dinámico -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: MÓDULO POS (TIENDA FÍSICA) -->
+        <div id="admin-tab-pos" class="admin-view-tab">
+          <div class="admin-header-row">
+            <div class="admin-page-title">
+              <h2>Punto de Venta Presencial (POS)</h2>
+              <p>Cobro ágil en mostrador con descuento inmediato de inventario físico y emisión de comprobante.</p>
+            </div>
+          </div>
+
+          <div class="pos-layout">
+            <div class="pos-products-panel">
+              <div class="pos-search-bar">
+                <input type="text" class="pos-search-input" placeholder="Buscar prenda por nombre o código de barra...">
+              </div>
+              <div class="pos-grid-items" id="pos-grid-items">
+                <!-- Renderizado dinámico -->
+              </div>
+            </div>
+
+            <!-- Panel de Cobro POS -->
+            <div class="pos-register-panel">
+              <h3 style="font-size:16px;font-weight:700;margin-bottom:6px;">Caja Mostrador</h3>
+              <div style="font-size:11px;color:var(--ct-muted);">Turno: Mañana · Cajero: Carlos M.</div>
+
+              <div class="pos-cart-list" id="pos-cart-list">
+                <!-- Items en caja -->
+              </div>
+
+              <div style="border-top:1px solid var(--ct-line);padding-top:12px;margin-top:auto;">
+                <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px;">
+                  <span>Subtotal:</span>
+                  <span id="pos-subtotal-val">0 Bs.</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:14px;font-size:20px;font-weight:800;color:var(--ct-ink);">
+                  <span>Total a Cobrar:</span>
+                  <span id="pos-total-val" style="color:var(--ct-wine)">0 Bs.</span>
+                </div>
+
+                <div style="font-size:11px;font-weight:700;text-transform:uppercase;margin-bottom:6px;">Medio de Pago:</div>
+                <div class="pos-pay-methods">
+                  <button type="button" class="pos-pay-btn active" onclick="window.CTApp.setPOSPayment('qr', this)">QR Simple</button>
+                  <button type="button" class="pos-pay-btn" onclick="window.CTApp.setPOSPayment('efectivo', this)">Efectivo</button>
+                  <button type="button" class="pos-pay-btn" onclick="window.CTApp.setPOSPayment('tarjeta', this)">Tarjeta</button>
+                </div>
+
+                <button class="btn-pos-charge" style="width:100%;" onclick="window.CTApp.chargePOS()">
+                  Cobrar y Descontar Stock
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: PEDIDO MANUAL (WHATSAPP DIRECTO) -->
+        <div id="admin-tab-manual-order" class="admin-view-tab">
+          <div class="admin-header-row">
+            <div class="admin-page-title">
+              <h2>Registrar Venta Directa de WhatsApp</h2>
+              <p>Formulario para que el personal registre ventas acordadas por chat sin pasar por la web.</p>
+            </div>
+          </div>
+
+          <div class="admin-card-container" style="max-width:760px;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+              <div class="form-group-field">
+                <label>Nombre del Cliente *</label>
+                <input type="text" id="manual-customer-name" value="Mariana Hurtado" placeholder="Nombre completo">
+              </div>
+              <div class="form-group-field">
+                <label>Teléfono WhatsApp *</label>
+                <input type="tel" id="manual-customer-phone" value="+591 71098765" placeholder="+591 ...">
+              </div>
+            </div>
+
+            <div class="form-group-field">
+              <label>Seleccionar Prenda del Catálogo</label>
+              <select id="manual-product-select" class="form-group-field" style="width:100%;padding:12px;border-radius:14px;border:1px solid var(--ct-line);">
+                <option value="2">Conjunto Sastrero Lino Oliva - 480 Bs.</option>
+                <option value="1">Vestido Gala Sirena Burdeos - 420 Bs.</option>
+                <option value="3">Blusa Kimono Satén Champán - 260 Bs.</option>
+                <option value="4">Vestido Drapeado Noche Noir - 390 Bs.</option>
+                <option value="5">Tapado Cachemira & Lana - 550 Bs.</option>
+              </select>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+              <div class="form-group-field">
+                <label>Modalidad de Entrega</label>
+                <select id="manual-delivery-type" style="width:100%;padding:12px;border-radius:14px;border:1px solid var(--ct-line);">
+                  <option value="Delivery a Domicilio (Cotizado Bs. 25)">Delivery a Domicilio (+25 Bs.)</option>
+                  <option value="Retiro en Showroom Local">Retiro en Showroom Local (Gratis)</option>
+                </select>
+              </div>
+              <div class="form-group-field">
+                <label>Dirección / Zona</label>
+                <input type="text" id="manual-delivery-address" value="Condominio La Casona, Apto 3B" placeholder="Zona, dirección o referencias">
+              </div>
+            </div>
+
+            <div style="margin-top:20px;display:flex;justify-content:flex-end;">
+              <button class="btn-primary-ct" onclick="window.CTApp.createManualWhatsAppOrder()">
+                Crear Pedido Manual y Asignar Reserva
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 5: INVENTARIO & RESERVAS MULTIVARIANTE -->
+        <div id="admin-tab-inventory" class="admin-view-tab">
+          <div class="admin-header-row">
+            <div class="admin-page-title">
+              <h2>Control de Inventario y Reservas</h2>
+              <p>Cumple la regla de consistencia: <strong>Stock Vendible = Stock Físico - Reservas Temporales</strong>.</p>
+            </div>
+          </div>
+
+          <div class="admin-card-container">
+            <div class="formal-table-wrap">
+              <table class="formal-table">
+                <thead>
+                  <tr>
+                    <th>SKU Base</th>
+                    <th>Prenda & Categoría</th>
+                    <th>Tallas</th>
+                    <th>Precio</th>
+                    <th>Stock Físico</th>
+                    <th>Reserva Temporal</th>
+                    <th>Stock Vendible</th>
+                    <th>Acción</th>
+                  </tr>
+                </thead>
+                <tbody id="inventory-table-tbody">
+                  <!-- Renderizado dinámico -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 6: CLIENTES & ACTIVACIÓN PROGRESIVA -->
+        <div id="admin-tab-customers" class="admin-view-tab">
+          <div class="admin-header-row">
+            <div class="admin-page-title">
+              <h2>Directorio de Clientes Unificado</h2>
+              <p>Historial multicanal con invitaciones de activación de cuenta por correo verificado.</p>
+            </div>
+          </div>
+
+          <div class="admin-card-container">
+            <div class="formal-table-wrap">
+              <table class="formal-table">
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th>Ciudad</th>
+                    <th>Historial</th>
+                    <th>Total Gastado</th>
+                    <th>Estado de Cuenta</th>
+                    <th>Acción</th>
+                  </tr>
+                </thead>
+                <tbody id="customers-table-tbody">
+                  <!-- Renderizado dinámico -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 7: PROMOCIONES & CUPONES -->
+        <div id="admin-tab-promos" class="admin-view-tab">
+          <div class="admin-header-row">
+            <div class="admin-page-title">
+              <h2>Gestión de Campañas y Cupones LIVE</h2>
+              <p>Configuración de promociones 2x1 combinables y cupones de transmisión en vivo.</p>
+            </div>
+          </div>
+
+          <div class="admin-card-container" style="max-width:820px;">
+            <div style="background:var(--ct-cream);padding:20px;border-radius:16px;border:1px solid var(--ct-line);margin-bottom:20px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                <div>
+                  <strong style="font-family:var(--font-mono);font-size:18px;color:var(--ct-wine)">TIKTOK2X1</strong>
+                  <span class="status-pill status-pago-confirmado" style="margin-left:10px;">Campaña Activa</span>
+                </div>
+                <button class="btn-tbl-action" onclick="alert('Campaña pausada')">Pausar Cupón</button>
+              </div>
+              <p style="font-size:12.5px;color:var(--ct-muted);line-height:1.6;">
+                <strong>Regla de negocio oficial:</strong> Descuenta automáticamente el artículo elegible de menor precio cuando el cliente compra 2 prendas, o aplica descuento proporcional en compra rápida.
+              </p>
+              <div style="display:flex;gap:24px;margin-top:14px;font-size:12px;">
+                <span>Canjes Realizados: <strong>14</strong></span>
+                <span>Límite de Usos: <strong>50</strong></span>
+                <span>Vigencia: <strong>Durante Transmisión LIVE</strong></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 8: BITÁCORA DE AUDITORÍA INMUTABLE -->
+        <div id="admin-tab-audit" class="admin-view-tab">
+          <div class="admin-header-row">
+            <div class="admin-page-title">
+              <h2>Bitácora de Auditoría del Sistema</h2>
+              <p>Registro inmutable de trazabilidad: cobros QR, ajustes de inventario, descuentos y cambios de estado.</p>
+            </div>
+          </div>
+
+          <div class="admin-card-container">
+            <div class="formal-table-wrap">
+              <table class="formal-table">
+                <thead>
+                  <tr>
+                    <th>Fecha / Hora</th>
+                    <th>Usuario Responsable</th>
+                    <th>Módulo</th>
+                    <th>Acción Registrada</th>
+                    <th>Detalle de Auditoría</th>
+                  </tr>
+                </thead>
+                <tbody id="audit-table-tbody">
+                  <!-- Renderizado dinámico -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 9: CONFIGURACIÓN GENERAL -->
+        <div id="admin-tab-settings" class="admin-view-tab">
+          <div class="admin-header-row">
+            <div class="admin-page-title">
+              <h2>Configuración del Negocio</h2>
+              <p>Parámetros operativos de la tienda, tiempos de reserva y WhatsApp oficial.</p>
+            </div>
+          </div>
+
+          <div class="admin-card-container" style="max-width:760px;">
+            <div class="form-group-field">
+              <label>Nombre Comercial</label>
+              <input type="text" value="Cecilia Tedin Live" readonly>
+            </div>
+            <div class="form-group-field">
+              <label>WhatsApp Oficial de Ventas</label>
+              <input type="text" value="+591 70000000">
+            </div>
+            <div class="form-group-field">
+              <label>Tiempo de Reserva Temporal para Pedidos Pendientes</label>
+              <input type="text" value="45 Minutos">
+            </div>
+            <div class="form-group-field">
+              <label>Tarifa Base de Delivery Cotizado</label>
+              <input type="text" value="25 Bs.">
+            </div>
+            <button class="btn-primary-ct" onclick="alert('Configuración guardada exitosamente.')">Guardar Cambios</button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       MODALES Y DRAWERS GLOBALES
+       ======================================================================== -->
+
+  <!-- Modal de Detalle de Prenda -->
+  <div id="product-detail-modal" class="modal-overlay" onclick="if(event.target===this) window.CTApp.closeDetail()"></div>
+
+  <!-- Drawer Lateral de la Bolsa / Carrito -->
+  <div id="cart-drawer-overlay" class="cart-drawer-overlay" onclick="if(event.target===this) window.CTApp.closeCart()">
+    <div class="cart-drawer">
+      <div class="cart-drawer-header">
+        <h3>Tu Bolsa de Compras</h3>
+        <button class="btn-close-modal" style="position:static;" onclick="window.CTApp.closeCart()">&times;</button>
+      </div>
+
+      <div class="cart-items-list" id="cart-items-list">
+        <!-- Renderizado dinámico -->
+      </div>
+
+      <div id="cart-totals-box" class="cart-extra-section">
+        <!-- Cupón -->
+        <div class="coupon-box">
+          <input type="text" id="cart-coupon-input" class="coupon-input" placeholder="Cupón (Ej: TIKTOK2X1)">
+          <button class="btn-apply-coupon" onclick="window.CTApp.applyCouponCart()">Aplicar</button>
+        </div>
+
+        <!-- Selector de Entrega -->
+        <div class="delivery-options-title">Modalidad de Entrega:</div>
+        <div class="delivery-pills">
+          <button class="delivery-pill-btn active" data-type="pickup" onclick="window.CTApp.setCartDelivery('pickup')">
+            Retiro Showroom (Gratis)
+          </button>
+          <button class="delivery-pill-btn" data-type="delivery" onclick="window.CTApp.setCartDelivery('delivery')">
+            Delivery (Bs. 25)
+          </button>
+        </div>
+
+        <!-- Totales -->
+        <div class="cart-totals">
+          <div class="total-row">
+            <span>Subtotal:</span>
+            <strong id="cart-subtotal-val">0 Bs.</strong>
+          </div>
+          <div class="total-row">
+            <span>Descuento Promocional:</span>
+            <strong id="cart-discount-val" style="color:var(--ct-wine)">0 Bs.</strong>
+          </div>
+          <div class="total-row">
+            <span>Envío:</span>
+            <strong id="cart-delivery-val">Gratis (Showroom)</strong>
+          </div>
+          <div class="total-row final">
+            <span>Total a Pagar:</span>
+            <strong id="cart-total-val">0 Bs.</strong>
+          </div>
+        </div>
+
+        <button class="btn-checkout-whatsapp" onclick="window.CTApp.checkoutCartWhatsApp()">
+          <span>Solicitar Pedido por WhatsApp</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Inspección de Pedido en Admin -->
+  <div id="order-inspector-modal" class="modal-overlay" onclick="if(event.target===this) window.CTApp.closeOrderInspector()"></div>
+
+  <!-- Modal de Éxito de Pedido Web -->
+  <div id="order-success-modal" class="modal-overlay" onclick="if(event.target===this) window.CTApp.closeOrderSuccessModal()"></div>
+
+  <!-- Bandeja de Notificaciones Toast -->
+  <div id="toast-shelf" class="toast-shelf"></div>
+
+  <!-- ========================================================================
+       BOTÓN FLOTANTE TIKTOK LIVE & DOCK DE CONTROL DEL SISTEMA (PARTE INFERIOR)
+       ======================================================================== -->
+
+  <!-- Botón Flotante TikTok LIVE -->
+  <button class="floating-tiktok-btn" id="floating-tiktok-btn" onclick="window.CTApp.switchWindow(2)" aria-label="Abrir Cuestionario TikTok LIVE">
+    <span class="floating-live-dot"></span>
+    <div class="floating-live-text-block">
+      <span class="floating-live-label">TIKTOK LIVE</span>
+      <span class="floating-live-title">Pedir en Vivo</span>
+    </div>
+    <span class="floating-live-arrow">&rarr;</span>
+  </button>
+
+  <!-- Dock Flotante Inferior de las Partes del Sistema (Simple & Minimalista) -->
+  <aside class="demo-floating-dock" id="demo-nav-bar" aria-label="Partes del Sistema">
+    <div class="dock-badge-label">
+      <span class="dock-dot"></span>
+      <span>Sistema</span>
+    </div>
+    <button type="button" class="switch-btn active" data-window="1" onclick="window.CTApp.switchWindow(1)">
+      <span>1. Tienda & Catálogo</span>
+      <span class="key-hint">1</span>
+    </button>
+    <button type="button" class="switch-btn" data-window="2" onclick="window.CTApp.switchWindow(2)">
+      <span>2. Cuestionario LIVE</span>
+      <span class="key-hint">2</span>
+    </button>
+    <button type="button" class="switch-btn admin-btn" data-window="3" onclick="window.CTApp.switchWindow(3)">
+      <span>3. Panel Admin</span>
+      <span class="key-hint">3</span>
+    </button>
+    <button type="button" class="btn-dock-reset" onclick="window.CTApp.resetDemoData()" title="Reiniciar datos simulados">
+      <span>↺</span>
+    </button>
+  </aside>
+
+  <!-- Script de Movimiento Original de la Marca -->
+  <script src="./CECILIA%20TEDIN%20LIVE%20%C2%B7%20Pedidos%20por%20WhatsApp_files/modern-elegance.js"></script>
+
+  <!-- Script Interactivo de la Propuesta -->
+  <script src="./app.js"></script>
+
+</body>
+</html>
